@@ -15,7 +15,7 @@ namespace NoteAppUI
         static void Main()
         {
 
-
+            // comment // comment
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
