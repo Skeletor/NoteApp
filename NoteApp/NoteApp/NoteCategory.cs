@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public class Class1
+    public enum NoteCategory
     {
+        JOB, HOME, HEALTH_AND_SPORT, PEOPLE, DOCUMENTS, FINANCE, OTHER
     }
 }
