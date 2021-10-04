@@ -58,9 +58,16 @@ namespace NoteApp
         }
 
         
-        public object Clone() // TODO
+        public object Clone()
         {
-            throw new NotImplementedException();
+            return new Note
+            {
+                Name = this.Name,
+                NoteText = this.NoteText,
+                CreationTime = this.CreationTime,
+                LastModifyTime = this.LastModifyTime,
+                NoteCategory = this.NoteCategory
+            };
         }
     }
 }
