@@ -16,8 +16,18 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
+            Test();
         }
 
+        /// <summary>
+        /// Тест-метод на проверку создания заметки
+        /// </summary>
+        private void Test()
+        {
+            Note note = new Note("title", "this_is_a_description");
+            label1.Text = note.Name;
+            label2.Text = note.NoteText;
+        }
         
     }
 }
