@@ -19,7 +19,7 @@ namespace NoteApp
             this.Name = name;
             this.NoteText = noteText;
             this.NoteCategory = noteCategory;
-            this.CreationTime = DateTime.Now;
+            this._creationTime = DateTime.Now;
             this.LastModifyTime = CreationTime;
         }
 
@@ -45,11 +45,7 @@ namespace NoteApp
             set { this._noteText = value; }
         }
 
-        public DateTime CreationTime
-        {
-            get { return this._creationTime; }
-            private set { this._creationTime = value; }
-        }
+        public DateTime CreationTime { get { return this._creationTime; } }
         
         public DateTime LastModifyTime
         {
@@ -64,7 +60,7 @@ namespace NoteApp
             {
                 Name = this.Name,
                 NoteText = this.NoteText,
-                CreationTime = this.CreationTime,
+                _creationTime = this.CreationTime,
                 LastModifyTime = this.LastModifyTime,
                 NoteCategory = this.NoteCategory
             };
