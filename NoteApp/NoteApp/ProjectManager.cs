@@ -8,11 +8,21 @@ using Newtonsoft.Json;
 
 namespace NoteApp
 {
-    public class ProjectManager
+    /// <summary>
+    /// Сервисный класс, предоставляющий методы для сериализации/десериализации класса "Проект"
+    /// </summary>
+    public static class ProjectManager
     {
-        private readonly string configPath = $"{Environment.CurrentDirectory}\\NoteApp\\dataConfig.json";
+        /// <summary>
+        /// Путь к конфигу JSON
+        /// </summary>
+        private static readonly string configPath = $"{Environment.CurrentDirectory}\\dataConfig.json";
 
-        public void SaveTo(Project project)
+        /// <summary>
+        /// Сохранение проекта в файл
+        /// </summary>
+        /// <param name="project">Проект, содержащий список заметок</param>
+        public static void SaveToFile(Project project)
         {
             using (StreamWriter sw = new StreamWriter(configPath))
             using (JsonWriter jr = new JsonTextWriter(sw))
@@ -21,12 +31,17 @@ namespace NoteApp
             }
         }
 
-        public void LoadFrom()
+        /// <summary>
+        /// Загружает (десериализует) данные из файла JSON
+        /// </summary>
+        /// <returns>Новый экземпляр класса Project</returns>
+        public static Project LoadFrom()
         {
             using (StreamReader sr = new StreamReader(configPath))
             using (JsonReader jr = new JsonTextReader(sr))
             {
-                Note note = (Note)new JsonSerializer().Deserialize<Note>(jr);
+                Project project = (Project)new JsonSerializer().Deserialize<Project>(jr);
+                return project;
             }
         }
     }
