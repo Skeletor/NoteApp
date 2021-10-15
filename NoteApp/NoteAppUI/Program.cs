@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NoteApp;
 
 namespace NoteAppUI
 {
@@ -14,8 +15,6 @@ namespace NoteAppUI
         [STAThread]
         static void Main()
         {
-
-            // comment // comment
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
