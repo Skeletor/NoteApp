@@ -11,9 +11,12 @@ using NoteApp;
 
 namespace NoteAppUI
 {
-    public partial class MainForm : Form
+    /// <summary>
+    /// Страница для тестов
+    /// </summary>
+    public partial class TestForm : Form
     {
-        public MainForm()
+        public TestForm()
         {
             InitializeComponent();
 
@@ -30,7 +33,7 @@ namespace NoteAppUI
             label1.Text = note.Name;
             label2.Text = note.NoteText;
         }
-        
+
         /// <summary>
         /// Тест-метод на проверку сериализации/десериализации. Отображается в label3 и label4
         /// </summary>
