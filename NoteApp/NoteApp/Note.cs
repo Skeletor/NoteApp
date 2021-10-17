@@ -44,23 +44,23 @@ namespace NoteApp
         /// <param name="noteCategory">Входящий параметр, определяющий категорию заметки (необяз.)</param>
         public Note(string name = "Без названия", string noteText = "", NoteCategory noteCategory = NoteCategory.OTHER)
         {
-            this.Name = name;
-            this.NoteText = noteText;
-            this.NoteCategory = noteCategory;
-            this._creationTime = DateTime.Now;
-            this.LastModifyTime = CreationTime;
+            Name = name;
+            NoteText = noteText;
+            NoteCategory = noteCategory;
+            _creationTime = DateTime.Now;
+            LastModifyTime = DateTime.Now;
         }
 
         /// <summary>
-        /// Заголовок заметки. Выбрасывает исключение при попытке установить длину заголовка >50
+        /// Заголовок заметки. Выбрасывает исключение при попытке установить длину заголовка больше 50
         /// </summary>
         public string Name 
         {
-            get { return this._name; } 
+            get { return _name; } 
             set 
             {
-                if (value.Length <= 50) this._name = value;
-                else throw new ArgumentException($"Введенное значение больше 50 символов! ({value})");
+                if (value.Length <= 50) _name = value;
+                else throw new ArgumentException($"Введенное значение больше 50 символов!");
             }
         }
 
@@ -69,8 +69,8 @@ namespace NoteApp
         /// </summary>
         public NoteCategory NoteCategory
         { 
-            get { return this._noteCategory; }
-            set { this._noteCategory = value; }
+            get { return _noteCategory; }
+            set { _noteCategory = value; }
         }
 
         /// <summary>
@@ -78,22 +78,26 @@ namespace NoteApp
         /// </summary>
         public string NoteText
         {
-            get { return this._noteText; }
-            set { this._noteText = value; }
+            get { return _noteText; }
+            set { _noteText = value; }
         }
 
         /// <summary>
         /// Время создания заметки
         /// </summary>
-        public DateTime CreationTime { get { return this._creationTime; } }
+        public DateTime CreationTime 
+        { 
+            get { return _creationTime; }
+            private set { _creationTime = value; }
+        }
         
         /// <summary>
         /// Время последнего изменения заметки
         /// </summary>
         public DateTime LastModifyTime
         {
-            get { return this._lastModifyTime; }
-            private set { this._lastModifyTime = value; }
+            get { return _lastModifyTime; }
+            set { _lastModifyTime = value; }
         }
 
         /// <summary>
@@ -106,10 +110,29 @@ namespace NoteApp
             {
                 Name = this.Name,
                 NoteText = this.NoteText,
-                _creationTime = this.CreationTime,
+                CreationTime = this.CreationTime,
                 LastModifyTime = this.LastModifyTime,
                 NoteCategory = this.NoteCategory
             };
+        }
+
+        /// <summary>
+        /// Сравнивает значения двух заметок
+        /// </summary>
+        /// <param name="obj">Заметка, с которой идет сравнение</param>
+        /// <returns>True, если все поля одной заметки совпадают с другой. Иначе - false</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Note other))
+                return false;
+
+            return (Name == other.Name && NoteText == other.NoteText && NoteCategory == other.NoteCategory && 
+                CreationTime == other.CreationTime && LastModifyTime == other.LastModifyTime);
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

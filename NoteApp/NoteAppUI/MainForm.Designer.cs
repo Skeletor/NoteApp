@@ -30,26 +30,26 @@ namespace NoteAppUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
-            this.createButton = new System.Windows.Forms.Button();
-            this.noteList = new System.Windows.Forms.ListBox();
-            this.noteCategorySelector = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.categoryLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.modifyTimeDisplayer = new System.Windows.Forms.TextBox();
-            this.creationTimeDisplayer = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.titleLabel = new System.Windows.Forms.Label();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.EditButton = new System.Windows.Forms.Button();
+            this.CreateButton = new System.Windows.Forms.Button();
+            this.NoteList = new System.Windows.Forms.ListBox();
+            this.NoteCategorySelector = new System.Windows.Forms.ComboBox();
+            this.ShowCategoryLabel_ = new System.Windows.Forms.Label();
+            this.CategoryLabel = new System.Windows.Forms.Label();
+            this.DescriptionTextBox = new System.Windows.Forms.TextBox();
+            this.ModifyTimeLabel_ = new System.Windows.Forms.Label();
+            this.ModifyTimeDisplayer = new System.Windows.Forms.TextBox();
+            this.CreationTimeDisplayer = new System.Windows.Forms.TextBox();
+            this.CreatedLabel_ = new System.Windows.Forms.Label();
+            this.CategoryLabelStatic_ = new System.Windows.Forms.Label();
+            this.TitleLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -57,44 +57,46 @@ namespace NoteAppUI
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // fileMenu
+            // FileMenu
             // 
-            this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitMenu});
-            this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(46, 24);
-            this.fileMenu.Text = "File";
+            this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExitMenu});
+            this.FileMenu.Name = "FileMenu";
+            this.FileMenu.Size = new System.Drawing.Size(46, 26);
+            this.FileMenu.Text = "File";
             // 
-            // exitMenu
+            // ExitMenu
             // 
-            this.exitMenu.Name = "exitMenu";
-            this.exitMenu.Size = new System.Drawing.Size(224, 26);
-            this.exitMenu.Text = "Exit";
+            this.ExitMenu.Name = "ExitMenu";
+            this.ExitMenu.Size = new System.Drawing.Size(224, 26);
+            this.ExitMenu.Text = "Exit";
+            this.ExitMenu.Click += new System.EventHandler(this.ExitMenu_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileMenu,
-            this.editMenu,
-            this.aboutMenu});
+            this.FileMenu,
+            this.EditMenu,
+            this.AboutMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(982, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1029, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // editMenu
+            // EditMenu
             // 
-            this.editMenu.Name = "editMenu";
-            this.editMenu.Size = new System.Drawing.Size(49, 24);
-            this.editMenu.Text = "Edit";
+            this.EditMenu.Name = "EditMenu";
+            this.EditMenu.Size = new System.Drawing.Size(49, 24);
+            this.EditMenu.Text = "Edit";
+            this.EditMenu.Click += new System.EventHandler(this.EditMenu_Click);
             // 
-            // aboutMenu
+            // AboutMenu
             // 
-            this.aboutMenu.Name = "aboutMenu";
-            this.aboutMenu.Size = new System.Drawing.Size(64, 24);
-            this.aboutMenu.Text = "About";
+            this.AboutMenu.Name = "AboutMenu";
+            this.AboutMenu.Size = new System.Drawing.Size(64, 24);
+            this.AboutMenu.Text = "About";
             // 
             // splitContainer1
             // 
@@ -107,193 +109,204 @@ namespace NoteAppUI
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.deleteButton);
-            this.splitContainer1.Panel1.Controls.Add(this.editButton);
-            this.splitContainer1.Panel1.Controls.Add(this.createButton);
-            this.splitContainer1.Panel1.Controls.Add(this.noteList);
-            this.splitContainer1.Panel1.Controls.Add(this.noteCategorySelector);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.DeleteButton);
+            this.splitContainer1.Panel1.Controls.Add(this.EditButton);
+            this.splitContainer1.Panel1.Controls.Add(this.CreateButton);
+            this.splitContainer1.Panel1.Controls.Add(this.NoteList);
+            this.splitContainer1.Panel1.Controls.Add(this.NoteCategorySelector);
+            this.splitContainer1.Panel1.Controls.Add(this.ShowCategoryLabel_);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel2.Controls.Add(this.categoryLabel);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Panel2.Controls.Add(this.modifyTimeDisplayer);
-            this.splitContainer1.Panel2.Controls.Add(this.creationTimeDisplayer);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Panel2.Controls.Add(this.titleLabel);
-            this.splitContainer1.Size = new System.Drawing.Size(982, 543);
-            this.splitContainer1.SplitterDistance = 396;
+            this.splitContainer1.Panel2.Controls.Add(this.CategoryLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.DescriptionTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.ModifyTimeLabel_);
+            this.splitContainer1.Panel2.Controls.Add(this.ModifyTimeDisplayer);
+            this.splitContainer1.Panel2.Controls.Add(this.CreationTimeDisplayer);
+            this.splitContainer1.Panel2.Controls.Add(this.CreatedLabel_);
+            this.splitContainer1.Panel2.Controls.Add(this.CategoryLabelStatic_);
+            this.splitContainer1.Panel2.Controls.Add(this.TitleLabel);
+            this.splitContainer1.Size = new System.Drawing.Size(1029, 583);
+            this.splitContainer1.SplitterDistance = 414;
             this.splitContainer1.TabIndex = 1;
             // 
-            // deleteButton
+            // DeleteButton
             // 
-            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteButton.Enabled = false;
-            this.deleteButton.Location = new System.Drawing.Point(249, 480);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(90, 30);
-            this.deleteButton.TabIndex = 5;
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteButton.Location = new System.Drawing.Point(249, 509);
+            this.DeleteButton.MaximumSize = new System.Drawing.Size(100, 30);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(85, 30);
+            this.DeleteButton.TabIndex = 5;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
-            // editButton
+            // EditButton
             // 
-            this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.editButton.Enabled = false;
-            this.editButton.Location = new System.Drawing.Point(148, 480);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(90, 30);
-            this.editButton.TabIndex = 4;
-            this.editButton.Text = "Edit";
-            this.editButton.UseVisualStyleBackColor = true;
+            this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditButton.Location = new System.Drawing.Point(148, 509);
+            this.EditButton.MaximumSize = new System.Drawing.Size(100, 30);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(85, 30);
+            this.EditButton.TabIndex = 4;
+            this.EditButton.Text = "Edit";
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
-            // createButton
+            // CreateButton
             // 
-            this.createButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.createButton.Location = new System.Drawing.Point(47, 480);
-            this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(90, 30);
-            this.createButton.TabIndex = 3;
-            this.createButton.Text = "New";
-            this.createButton.UseVisualStyleBackColor = true;
-            this.createButton.Click += new System.EventHandler(this.createButton_Click);
+            this.CreateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CreateButton.Location = new System.Drawing.Point(47, 509);
+            this.CreateButton.MaximumSize = new System.Drawing.Size(100, 30);
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(85, 30);
+            this.CreateButton.TabIndex = 3;
+            this.CreateButton.Text = "New";
+            this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
-            // noteList
+            // NoteList
             // 
-            this.noteList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.NoteList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.noteList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.noteList.FormattingEnabled = true;
-            this.noteList.ItemHeight = 20;
-            this.noteList.Location = new System.Drawing.Point(13, 53);
-            this.noteList.Name = "noteList";
-            this.noteList.Size = new System.Drawing.Size(366, 384);
-            this.noteList.TabIndex = 2;
+            this.NoteList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NoteList.FormattingEnabled = true;
+            this.NoteList.ItemHeight = 20;
+            this.NoteList.Location = new System.Drawing.Point(13, 53);
+            this.NoteList.Name = "NoteList";
+            this.NoteList.Size = new System.Drawing.Size(384, 424);
+            this.NoteList.TabIndex = 2;
+            this.NoteList.SelectedIndexChanged += new System.EventHandler(this.NoteList_SelectedIndexChanged);
             // 
-            // noteCategorySelector
+            // NoteCategorySelector
             // 
-            this.noteCategorySelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.noteCategorySelector.FormattingEnabled = true;
-            this.noteCategorySelector.Location = new System.Drawing.Point(124, 7);
-            this.noteCategorySelector.MaxDropDownItems = 7;
-            this.noteCategorySelector.Name = "noteCategorySelector";
-            this.noteCategorySelector.Size = new System.Drawing.Size(212, 24);
-            this.noteCategorySelector.TabIndex = 1;
+            this.NoteCategorySelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.NoteCategorySelector.FormattingEnabled = true;
+            this.NoteCategorySelector.Location = new System.Drawing.Point(124, 7);
+            this.NoteCategorySelector.MaxDropDownItems = 7;
+            this.NoteCategorySelector.Name = "NoteCategorySelector";
+            this.NoteCategorySelector.Size = new System.Drawing.Size(212, 24);
+            this.NoteCategorySelector.TabIndex = 1;
+            this.NoteCategorySelector.SelectedIndexChanged += new System.EventHandler(this.NoteCategorySelector_SelectedIndexChanged);
             // 
-            // label1
+            // ShowCategoryLabel_
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Show Category:";
+            this.ShowCategoryLabel_.AutoSize = true;
+            this.ShowCategoryLabel_.Location = new System.Drawing.Point(13, 10);
+            this.ShowCategoryLabel_.Name = "ShowCategoryLabel_";
+            this.ShowCategoryLabel_.Size = new System.Drawing.Size(107, 17);
+            this.ShowCategoryLabel_.TabIndex = 0;
+            this.ShowCategoryLabel_.Text = "Show Category:";
             // 
-            // categoryLabel
+            // CategoryLabel
             // 
-            this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(101, 59);
-            this.categoryLabel.Name = "categoryLabel";
-            this.categoryLabel.Size = new System.Drawing.Size(0, 17);
-            this.categoryLabel.TabIndex = 7;
+            this.CategoryLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CategoryLabel.AutoSize = true;
+            this.CategoryLabel.Location = new System.Drawing.Point(101, 59);
+            this.CategoryLabel.Name = "CategoryLabel";
+            this.CategoryLabel.Size = new System.Drawing.Size(0, 17);
+            this.CategoryLabel.TabIndex = 7;
             // 
-            // textBox1
+            // DescriptionTextBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(17, 126);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(554, 405);
-            this.textBox1.TabIndex = 6;
+            this.DescriptionTextBox.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.DescriptionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DescriptionTextBox.Location = new System.Drawing.Point(17, 126);
+            this.DescriptionTextBox.Multiline = true;
+            this.DescriptionTextBox.Name = "DescriptionTextBox";
+            this.DescriptionTextBox.ReadOnly = true;
+            this.DescriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DescriptionTextBox.Size = new System.Drawing.Size(583, 445);
+            this.DescriptionTextBox.TabIndex = 6;
             // 
-            // label4
+            // ModifyTimeLabel_
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(255, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 17);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Last Modify Time:";
+            this.ModifyTimeLabel_.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ModifyTimeLabel_.AutoSize = true;
+            this.ModifyTimeLabel_.Location = new System.Drawing.Point(269, 89);
+            this.ModifyTimeLabel_.Name = "ModifyTimeLabel_";
+            this.ModifyTimeLabel_.Size = new System.Drawing.Size(119, 17);
+            this.ModifyTimeLabel_.TabIndex = 5;
+            this.ModifyTimeLabel_.Text = "Last Modify Time:";
             // 
-            // modifyTimeDisplayer
+            // ModifyTimeDisplayer
             // 
-            this.modifyTimeDisplayer.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.modifyTimeDisplayer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.modifyTimeDisplayer.Location = new System.Drawing.Point(380, 86);
-            this.modifyTimeDisplayer.Name = "modifyTimeDisplayer";
-            this.modifyTimeDisplayer.ReadOnly = true;
-            this.modifyTimeDisplayer.Size = new System.Drawing.Size(130, 22);
-            this.modifyTimeDisplayer.TabIndex = 4;
-            this.modifyTimeDisplayer.Text = "15.10.2021";
+            this.ModifyTimeDisplayer.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ModifyTimeDisplayer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ModifyTimeDisplayer.Location = new System.Drawing.Point(394, 86);
+            this.ModifyTimeDisplayer.Name = "ModifyTimeDisplayer";
+            this.ModifyTimeDisplayer.ReadOnly = true;
+            this.ModifyTimeDisplayer.Size = new System.Drawing.Size(130, 22);
+            this.ModifyTimeDisplayer.TabIndex = 4;
+            this.ModifyTimeDisplayer.Text = "15.10.2021";
             // 
-            // creationTimeDisplayer
+            // CreationTimeDisplayer
             // 
-            this.creationTimeDisplayer.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.creationTimeDisplayer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.creationTimeDisplayer.Location = new System.Drawing.Point(96, 86);
-            this.creationTimeDisplayer.Name = "creationTimeDisplayer";
-            this.creationTimeDisplayer.ReadOnly = true;
-            this.creationTimeDisplayer.Size = new System.Drawing.Size(130, 22);
-            this.creationTimeDisplayer.TabIndex = 3;
-            this.creationTimeDisplayer.Text = "15.10.2021";
+            this.CreationTimeDisplayer.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CreationTimeDisplayer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.CreationTimeDisplayer.Location = new System.Drawing.Point(110, 86);
+            this.CreationTimeDisplayer.Name = "CreationTimeDisplayer";
+            this.CreationTimeDisplayer.ReadOnly = true;
+            this.CreationTimeDisplayer.Size = new System.Drawing.Size(130, 22);
+            this.CreationTimeDisplayer.TabIndex = 3;
+            this.CreationTimeDisplayer.Text = "15.10.2021";
             // 
-            // label3
+            // CreatedLabel_
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(14, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Created:";
+            this.CreatedLabel_.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CreatedLabel_.AutoSize = true;
+            this.CreatedLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CreatedLabel_.Location = new System.Drawing.Point(28, 89);
+            this.CreatedLabel_.Name = "CreatedLabel_";
+            this.CreatedLabel_.Size = new System.Drawing.Size(62, 17);
+            this.CreatedLabel_.TabIndex = 2;
+            this.CreatedLabel_.Text = "Created:";
             // 
-            // label2
+            // CategoryLabelStatic_
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(14, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Category:";
+            this.CategoryLabelStatic_.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CategoryLabelStatic_.AutoSize = true;
+            this.CategoryLabelStatic_.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CategoryLabelStatic_.Location = new System.Drawing.Point(28, 59);
+            this.CategoryLabelStatic_.Name = "CategoryLabelStatic_";
+            this.CategoryLabelStatic_.Size = new System.Drawing.Size(69, 17);
+            this.CategoryLabelStatic_.TabIndex = 1;
+            this.CategoryLabelStatic_.Text = "Category:";
             // 
-            // titleLabel
+            // TitleLabel
             // 
-            this.titleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(163, 10);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(224, 35);
-            this.titleLabel.TabIndex = 0;
-            this.titleLabel.Text = "This is a test label";
-            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.TitleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.TitleLabel.AutoSize = true;
+            this.TitleLabel.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Location = new System.Drawing.Point(177, 10);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(224, 35);
+            this.TitleLabel.TabIndex = 0;
+            this.TitleLabel.Text = "This is a test label";
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 571);
+            this.ClientSize = new System.Drawing.Size(1029, 611);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1000, 280);
             this.Name = "MainForm";
             this.Text = "NoteApp";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -309,26 +322,26 @@ namespace NoteAppUI
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem fileMenu;
-        private System.Windows.Forms.ToolStripMenuItem exitMenu;
+        private System.Windows.Forms.ToolStripMenuItem FileMenu;
+        private System.Windows.Forms.ToolStripMenuItem ExitMenu;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem editMenu;
-        private System.Windows.Forms.ToolStripMenuItem aboutMenu;
+        private System.Windows.Forms.ToolStripMenuItem EditMenu;
+        private System.Windows.Forms.ToolStripMenuItem AboutMenu;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox noteCategorySelector;
-        private System.Windows.Forms.ListBox noteList;
-        private System.Windows.Forms.Button createButton;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button editButton;
-        private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox creationTimeDisplayer;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox modifyTimeDisplayer;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label categoryLabel;
+        private System.Windows.Forms.Label ShowCategoryLabel_;
+        private System.Windows.Forms.ComboBox NoteCategorySelector;
+        private System.Windows.Forms.ListBox NoteList;
+        private System.Windows.Forms.Button CreateButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.Label TitleLabel;
+        private System.Windows.Forms.Label CategoryLabelStatic_;
+        private System.Windows.Forms.Label CreatedLabel_;
+        private System.Windows.Forms.TextBox CreationTimeDisplayer;
+        private System.Windows.Forms.Label ModifyTimeLabel_;
+        private System.Windows.Forms.TextBox ModifyTimeDisplayer;
+        private System.Windows.Forms.TextBox DescriptionTextBox;
+        private System.Windows.Forms.Label CategoryLabel;
     }
 }
 

@@ -40,8 +40,7 @@ namespace NoteApp
             using (StreamReader sr = new StreamReader(configPath))
             using (JsonReader jr = new JsonTextReader(sr))
             {
-                Project project = (Project)new JsonSerializer().Deserialize<Project>(jr);
-                return project;
+                return (Project)new JsonSerializer().Deserialize<Project>(jr);
             }
         }
     }
