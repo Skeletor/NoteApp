@@ -11,14 +11,29 @@ using NoteApp;
 
 namespace NoteAppUI
 {
+    /// <summary>
+    /// Окно создания/редактирования выбранных заметок
+    /// </summary>
     public partial class EditNoteForm : Form
     {
+        /// <summary>
+        /// Временная переменная, куда помещается только что созданная/отредактированная заметка
+        /// </summary>
         public Note NewNote { get; private set; }
 
+        /// <summary>
+        /// Список заметок, загружаемый из файла
+        /// </summary>
         private Project noteList = ProjectManager.LoadFrom();
 
+        /// <summary>
+        /// Текущий индекс заметки в списке
+        /// </summary>
         private int noteIndex = -1;
 
+        /// <summary>
+        /// Стандартное название заголовка
+        /// </summary>
         private readonly string defaultName = "Без названия";
 
         public EditNoteForm()
@@ -33,6 +48,10 @@ namespace NoteAppUI
             FillEditForm(note);
         }
 
+        /// <summary>
+        /// Заполняет данные формы
+        /// </summary>
+        /// <param name="note">Если null, заполняет стандартным значением</param>
         private void FillEditForm(Note note)
         {
             FillWithDefault();
@@ -49,6 +68,9 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Заполнение элементов стандартными значениями
+        /// </summary>
         private void FillWithDefault()
         {
             object[] categories = { NoteCategory.JOB, NoteCategory.HOME, NoteCategory.HEALTH_AND_SPORT,
@@ -61,19 +83,37 @@ namespace NoteAppUI
             ModifyTimeDisplayer.Text = DateTime.Now.ToString("g");
         }
 
+        /// <summary>
+        /// Происходит при нажатии на кнопку "OK"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e)
         {
+            if (TitleTextBox.Text.Length > 50)
+            {
+                MessageBox.Show("Максимально допустимая длина заголовка - 50 символов", "Внимание");
+                return;
+            }    
+
             if (TitleTextBox.Text.Trim() == "")
             {
                 if (MessageBox.Show("Попытка сохранить заметку с пустым именем. Будет сохранено как \"Без названия\"",
                     "Внимание", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    if (IsNoteInCollection(NewNote)) // Unaccessible due to deserializer bug
+                    if (IsNoteInCollection(NewNote))
                     {
-                        NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
-                            (NoteCategory)(CategorySelector.SelectedIndex + 1));
-                        noteList.Notes.RemoveAt(noteIndex);
-                        noteList.Notes.Insert(noteIndex, NewNote);
+                        if (!WasEdited(NewNote))
+                            SaveAndClose();
+
+                        else
+                        {
+                            NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
+                                (NoteCategory)(CategorySelector.SelectedIndex + 1));
+
+                            noteList.Notes.RemoveAt(noteIndex);
+                            noteList.Notes.Insert(noteIndex, NewNote);
+                        }
                     }
                     else
                     {
@@ -81,6 +121,7 @@ namespace NoteAppUI
 
                         NewNote = ChangeNewNoteAttributes(defaultName, DescriptionTextBox.Text,
                             (NoteCategory)(CategorySelector.SelectedIndex + 1));
+
                         noteList.Notes.Insert(0, NewNote);
                     }
 
@@ -89,13 +130,19 @@ namespace NoteAppUI
             }
             else
             {
-                if (IsNoteInCollection(NewNote)) // Unaccessible due to deserializer bug
+                if (IsNoteInCollection(NewNote))
                 {
-                    NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text, 
-                        (NoteCategory)(CategorySelector.SelectedIndex + 1));
+                    if (!WasEdited(NewNote))
+                        SaveAndClose();
 
-                    noteList.Notes.RemoveAt(noteIndex);
-                    noteList.Notes.Insert(noteIndex, NewNote);
+                    else
+                    {
+                        NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
+                            (NoteCategory)(CategorySelector.SelectedIndex + 1));
+
+                        noteList.Notes.RemoveAt(noteIndex);
+                        noteList.Notes.Insert(noteIndex, NewNote);
+                    }
                 }
                 else
                 {
@@ -103,6 +150,7 @@ namespace NoteAppUI
 
                     NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
                         (NoteCategory)(CategorySelector.SelectedIndex + 1));
+
                     noteList.Notes.Insert(0, NewNote);
                 }
 
@@ -111,6 +159,26 @@ namespace NoteAppUI
             
         }
 
+        /// <summary>
+        /// Проверяет, была ли изменена заметка
+        /// </summary>
+        /// <param name="note">Заметка, которая проверяется</param>
+        /// <returns>true, если было изменение, иначе - false</returns>
+        private bool WasEdited(Note note)
+        {
+            if (note.Name == TitleTextBox.Text && note.NoteText == DescriptionTextBox.Text &&
+                note.NoteCategory == (NoteCategory)(CategorySelector.SelectedIndex + 1)) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Присвоить временной заметке данные из формы
+        /// </summary>
+        /// <param name="title">Заголовок</param>
+        /// <param name="description">Описание</param>
+        /// <param name="category">Категория</param>
+        /// <returns>Изменённая заметка</returns>
         private Note ChangeNewNoteAttributes(string title, string description, NoteCategory category)
         {
             NewNote.Name = title;
@@ -121,18 +189,31 @@ namespace NoteAppUI
             return NewNote;
         }
 
+        /// <summary>
+        /// Происходит при нажатии на кнопку "Cancel"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             NewNote = null;
             SaveAndClose();
         }
 
+        /// <summary>
+        /// Сохраняет список заметок в файл и закрывает форму
+        /// </summary>
         private void SaveAndClose()
         {
             ProjectManager.SaveToFile(noteList);
             this.Close();
         }
 
+        /// <summary>
+        /// Проверяет, есть ли данная заметка в списке заметок
+        /// </summary>
+        /// <param name="note">Проверяемая заметка</param>
+        /// <returns>true, если есть в списке, иначе - false</returns>
         private bool IsNoteInCollection(Note note)
         {
             foreach (var item in noteList.Notes)
@@ -144,5 +225,17 @@ namespace NoteAppUI
 
             return false;
         }
+
+        /// <summary>
+        /// Происходит при изменении текста в заголовке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TitleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TitleTextBox.ForeColor = TitleTextBox.Text.Length > 50 ? Color.Red : Color.Black;
+        }
+
+        
     }
 }

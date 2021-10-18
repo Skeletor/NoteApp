@@ -108,12 +108,13 @@ namespace NoteAppUI
             // 
             this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TitleTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.TitleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TitleTextBox.Location = new System.Drawing.Point(91, 13);
-            this.TitleTextBox.MaxLength = 50;
             this.TitleTextBox.Name = "TitleTextBox";
-            this.TitleTextBox.Size = new System.Drawing.Size(651, 24);
+            this.TitleTextBox.Size = new System.Drawing.Size(676, 24);
             this.TitleTextBox.TabIndex = 6;
+            this.TitleTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
             // 
             // DescriptionTextBox
             // 
@@ -196,6 +197,7 @@ namespace NoteAppUI
             this.Controls.Add(this.TitleLabel_);
             this.MinimumSize = new System.Drawing.Size(800, 275);
             this.Name = "EditNoteForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
             this.PerformLayout();

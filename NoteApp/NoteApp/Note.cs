@@ -47,8 +47,9 @@ namespace NoteApp
             Name = name;
             NoteText = noteText;
             NoteCategory = noteCategory;
-            _creationTime = DateTime.Now;
+            
             LastModifyTime = DateTime.Now;
+            CreationTime = LastModifyTime;
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace NoteApp
         public DateTime CreationTime 
         { 
             get { return _creationTime; }
-            private set { _creationTime = value; }
+            set { _creationTime = value; }
         }
         
         /// <summary>
@@ -120,7 +121,7 @@ namespace NoteApp
         /// Сравнивает значения двух заметок
         /// </summary>
         /// <param name="obj">Заметка, с которой идет сравнение</param>
-        /// <returns>True, если все поля одной заметки совпадают с другой. Иначе - false</returns>
+        /// <returns>true, если все поля одной заметки совпадают с другой. Иначе - false</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is Note other))
@@ -130,6 +131,10 @@ namespace NoteApp
                 CreationTime == other.CreationTime && LastModifyTime == other.LastModifyTime);
         }
 
+        /// <summary>
+        /// Отображает заметку в списке только по её заголовку
+        /// </summary>
+        /// <returns>Имя заметки</returns>
         public override string ToString()
         {
             return Name;

@@ -24,6 +24,8 @@ namespace NoteAppUI
             TestProject();
         }
 
+        
+
         /// <summary>
         /// Тест-метод на проверку создания заметки. Отображается в label1 и label2
         /// </summary>
@@ -39,6 +41,7 @@ namespace NoteAppUI
         /// </summary>
         private void TestProject()
         {
+            
             Project project = new Project();
 
             project.Notes.Add(new Note());
@@ -49,8 +52,21 @@ namespace NoteAppUI
             ProjectManager.SaveToFile(project);
             Project p = ProjectManager.LoadFrom();
 
+            // Проверка таймера
+            Timer t = new Timer();
+            t.Interval = 4000;
+            t.Tick += T_Tick;
+            t.Start();
+
+            
             label3.Text = p.Notes[2].Name;
             label4.Text = p.Notes[2].NoteText;
+        }
+
+        // Проверка таймера
+        private void T_Tick(object sender, EventArgs e)
+        {
+            label3.Text = "TEST";
         }
     }
 }
