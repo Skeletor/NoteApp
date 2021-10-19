@@ -12,17 +12,8 @@ namespace NoteApp
     public class Project
     {
         /// <summary>
-        /// Список заметок. Взаимодействует с Notes
-        /// </summary>
-        private List<Note> notes;
-
-        /// <summary>
         /// Список заметок
         /// </summary>
-        public List<Note> Notes
-        {
-            get { return this.notes; }
-            set { this.notes = value; }
-        }
+        public List<Note> Notes { get; set; } = new List<Note>();
     }
 }

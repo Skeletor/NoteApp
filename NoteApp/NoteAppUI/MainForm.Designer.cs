@@ -30,12 +30,15 @@ namespace NoteAppUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.EditMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
             this.CreateButton = new System.Windows.Forms.Button();
@@ -50,8 +53,7 @@ namespace NoteAppUI
             this.CreatedLabel_ = new System.Windows.Forms.Label();
             this.CategoryLabelStatic_ = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -64,7 +66,7 @@ namespace NoteAppUI
             this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExitMenu});
             this.FileMenu.Name = "FileMenu";
-            this.FileMenu.Size = new System.Drawing.Size(46, 24);
+            this.FileMenu.Size = new System.Drawing.Size(46, 26);
             this.FileMenu.Text = "File";
             // 
             // ExitMenu
@@ -83,21 +85,21 @@ namespace NoteAppUI
             this.AboutMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1032, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // EditMenu
             // 
             this.EditMenu.Name = "EditMenu";
-            this.EditMenu.Size = new System.Drawing.Size(49, 24);
+            this.EditMenu.Size = new System.Drawing.Size(49, 26);
             this.EditMenu.Text = "Edit";
             this.EditMenu.Click += new System.EventHandler(this.EditMenu_Click);
             // 
             // AboutMenu
             // 
             this.AboutMenu.Name = "AboutMenu";
-            this.AboutMenu.Size = new System.Drawing.Size(64, 24);
+            this.AboutMenu.Size = new System.Drawing.Size(64, 26);
             this.AboutMenu.Text = "About";
             this.AboutMenu.Click += new System.EventHandler(this.AboutMenu_Click);
             // 
@@ -132,18 +134,38 @@ namespace NoteAppUI
             this.splitContainer1.Panel2.Controls.Add(this.CreatedLabel_);
             this.splitContainer1.Panel2.Controls.Add(this.CategoryLabelStatic_);
             this.splitContainer1.Panel2.Controls.Add(this.TitleLabel);
-            this.splitContainer1.Size = new System.Drawing.Size(1067, 613);
-            this.splitContainer1.SplitterDistance = 429;
+            this.splitContainer1.Size = new System.Drawing.Size(1032, 605);
+            this.splitContainer1.SplitterDistance = 414;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(249, 577);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "-200";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(148, 578);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "+200";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // DeleteButton
             // 
             this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteButton.Location = new System.Drawing.Point(249, 539);
+            this.DeleteButton.Location = new System.Drawing.Point(249, 531);
             this.DeleteButton.MaximumSize = new System.Drawing.Size(100, 30);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(100, 30);
+            this.DeleteButton.Size = new System.Drawing.Size(85, 30);
             this.DeleteButton.TabIndex = 5;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
@@ -153,10 +175,10 @@ namespace NoteAppUI
             // 
             this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.EditButton.Location = new System.Drawing.Point(148, 539);
+            this.EditButton.Location = new System.Drawing.Point(148, 531);
             this.EditButton.MaximumSize = new System.Drawing.Size(100, 30);
             this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(100, 30);
+            this.EditButton.Size = new System.Drawing.Size(85, 30);
             this.EditButton.TabIndex = 4;
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
@@ -166,10 +188,10 @@ namespace NoteAppUI
             // 
             this.CreateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreateButton.Location = new System.Drawing.Point(47, 539);
+            this.CreateButton.Location = new System.Drawing.Point(47, 531);
             this.CreateButton.MaximumSize = new System.Drawing.Size(100, 30);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(100, 30);
+            this.CreateButton.Size = new System.Drawing.Size(85, 30);
             this.CreateButton.TabIndex = 3;
             this.CreateButton.Text = "New";
             this.CreateButton.UseVisualStyleBackColor = true;
@@ -185,7 +207,7 @@ namespace NoteAppUI
             this.NoteList.ItemHeight = 20;
             this.NoteList.Location = new System.Drawing.Point(13, 53);
             this.NoteList.Name = "NoteList";
-            this.NoteList.Size = new System.Drawing.Size(399, 444);
+            this.NoteList.Size = new System.Drawing.Size(384, 424);
             this.NoteList.TabIndex = 2;
             this.NoteList.SelectedIndexChanged += new System.EventHandler(this.NoteList_SelectedIndexChanged);
             // 
@@ -231,8 +253,9 @@ namespace NoteAppUI
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
             this.DescriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(606, 475);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(586, 467);
             this.DescriptionTextBox.TabIndex = 6;
+            this.DescriptionTextBox.Enter += new System.EventHandler(this.DescriptionTextBox_Enter);
             // 
             // ModifyTimeLabel_
             // 
@@ -293,42 +316,28 @@ namespace NoteAppUI
             this.TitleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.TitleLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.TitleLabel.Location = new System.Drawing.Point(22, 10);
-            this.TitleLabel.MaximumSize = new System.Drawing.Size(600, 45);
+            this.TitleLabel.MaximumSize = new System.Drawing.Size(590, 45);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(600, 45);
+            this.TitleLabel.Size = new System.Drawing.Size(590, 45);
             this.TitleLabel.TabIndex = 0;
-            this.TitleLabel.Text = "This is a test label";
+            this.TitleLabel.Text = "This is a title label";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // toolTip1
             // 
-            this.button1.Location = new System.Drawing.Point(148, 578);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "+200";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(249, 577);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "-200";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.toolTip1.AutoPopDelay = 4000;
+            this.toolTip1.InitialDelay = 100;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 641);
+            this.ClientSize = new System.Drawing.Size(1032, 633);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(1000, 280);
+            this.MinimumSize = new System.Drawing.Size(1000, 300);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteApp";
@@ -370,6 +379,7 @@ namespace NoteAppUI
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

@@ -17,6 +17,16 @@ namespace NoteAppUI
     public partial class EditNoteForm : Form
     {
         /// <summary>
+        /// Текущий индекс заметки в списке
+        /// </summary>
+        private int _noteIndex = -1;
+
+        /// <summary>
+        /// Стандартное название заголовка
+        /// </summary>
+        private readonly string _defaultName = "Без названия";
+
+        /// <summary>
         /// Временная переменная, куда помещается только что созданная/отредактированная заметка
         /// </summary>
         public Note NewNote { get; private set; }
@@ -24,24 +34,21 @@ namespace NoteAppUI
         /// <summary>
         /// Список заметок, загружаемый из файла
         /// </summary>
-        private Project noteList = ProjectManager.LoadFrom();
+        private Project Notes { get; set; } = ProjectManager.LoadFrom();
 
         /// <summary>
-        /// Текущий индекс заметки в списке
+        /// Происходит при создании формы
         /// </summary>
-        private int noteIndex = -1;
-
-        /// <summary>
-        /// Стандартное название заголовка
-        /// </summary>
-        private readonly string defaultName = "Без названия";
-
         public EditNoteForm()
         {
             InitializeComponent();
             FillEditForm(null);
         }
 
+        /// <summary>
+        /// Происходит при создании формы
+        /// </summary>
+        /// <param name="note">Заметка, данные которой нужно отобразить на форме</param>
         public EditNoteForm(Note note)
         {
             InitializeComponent();
@@ -73,8 +80,8 @@ namespace NoteAppUI
         /// </summary>
         private void FillWithDefault()
         {
-            object[] categories = { NoteCategory.JOB, NoteCategory.HOME, NoteCategory.HEALTH_AND_SPORT,
-            NoteCategory.PEOPLE, NoteCategory.DOCUMENTS, NoteCategory.FINANCE, NoteCategory.OTHER };
+            object[] categories = { NoteCategory.Job, NoteCategory.Home, NoteCategory.HealthAndSport,
+            NoteCategory.People, NoteCategory.Documents, NoteCategory.Finance, NoteCategory.Other };
 
             CategorySelector.Items.AddRange(categories);
             CategorySelector.SelectedIndex = 0;
@@ -90,12 +97,6 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e)
         {
-            if (TitleTextBox.Text.Length > 50)
-            {
-                MessageBox.Show("Максимально допустимая длина заголовка - 50 символов", "Внимание");
-                return;
-            }    
-
             if (TitleTextBox.Text.Trim() == "")
             {
                 if (MessageBox.Show("Попытка сохранить заметку с пустым именем. Будет сохранено как \"Без названия\"",
@@ -111,18 +112,18 @@ namespace NoteAppUI
                             NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
                                 (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                            noteList.Notes.RemoveAt(noteIndex);
-                            noteList.Notes.Insert(noteIndex, NewNote);
+                            Notes.Notes.RemoveAt(_noteIndex);
+                            Notes.Notes.Insert(_noteIndex, NewNote);
                         }
                     }
                     else
                     {
                         NewNote = new Note();
 
-                        NewNote = ChangeNewNoteAttributes(defaultName, DescriptionTextBox.Text,
+                        NewNote = ChangeNewNoteAttributes(_defaultName, DescriptionTextBox.Text,
                             (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                        noteList.Notes.Insert(0, NewNote);
+                        Notes.Notes.Insert(0, NewNote);
                     }
 
                     SaveAndClose();
@@ -130,33 +131,41 @@ namespace NoteAppUI
             }
             else
             {
-                if (IsNoteInCollection(NewNote))
+                try
                 {
-                    if (!WasEdited(NewNote))
-                        SaveAndClose();
+                    if (IsNoteInCollection(NewNote))
+                    {
+                        if (!WasEdited(NewNote))
+                            SaveAndClose();
 
+                        else
+                        {
+                            NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
+                                (NoteCategory)(CategorySelector.SelectedIndex + 1));
+
+                            Notes.Notes.RemoveAt(_noteIndex);
+                            Notes.Notes.Insert(_noteIndex, NewNote);
+                        }
+                    }
                     else
                     {
+                        NewNote = new Note();
+
                         NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
                             (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                        noteList.Notes.RemoveAt(noteIndex);
-                        noteList.Notes.Insert(noteIndex, NewNote);
+                        Notes.Notes.Insert(0, NewNote);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    NewNote = new Note();
-
-                    NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
-                        (NoteCategory)(CategorySelector.SelectedIndex + 1));
-
-                    noteList.Notes.Insert(0, NewNote);
+                    MessageBox.Show(ex.Message);
+                    return;
                 }
 
                 SaveAndClose();
             }
-            
+
         }
 
         /// <summary>
@@ -205,7 +214,7 @@ namespace NoteAppUI
         /// </summary>
         private void SaveAndClose()
         {
-            ProjectManager.SaveToFile(noteList);
+            ProjectManager.SaveTo(Notes);
             this.Close();
         }
 
@@ -216,10 +225,10 @@ namespace NoteAppUI
         /// <returns>true, если есть в списке, иначе - false</returns>
         private bool IsNoteInCollection(Note note)
         {
-            foreach (var item in noteList.Notes)
+            foreach (var item in Notes.Notes)
                 if (item.Equals(note))
                 {
-                    noteIndex = noteList.Notes.IndexOf(item);
+                    _noteIndex = Notes.Notes.IndexOf(item);
                     return true;
                 }
 

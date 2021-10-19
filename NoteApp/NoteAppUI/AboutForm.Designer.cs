@@ -57,7 +57,7 @@ namespace NoteAppUI
             this.VersionLabel_.Name = "VersionLabel_";
             this.VersionLabel_.Size = new System.Drawing.Size(59, 25);
             this.VersionLabel_.TabIndex = 1;
-            this.VersionLabel_.Text = "v. 1.0";
+            this.VersionLabel_.Text = "v. 1.5";
             // 
             // AuthorLabel_
             // 

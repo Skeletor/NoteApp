@@ -5,24 +5,41 @@ namespace NoteAppUI
 {
     public partial class AboutForm : Form
     {
-        public static bool isShown
-        {
-            get; private set;
-        }
+        /// <summary>
+        /// Переменная, показывающая, отображена ли форма
+        /// </summary>
+        public static bool IsShown { get; private set; }
 
+        /// <summary>
+        /// Происходит при создании нового экземпляра формы
+        /// </summary>
         public AboutForm()
         {
             InitializeComponent();
-            isShown = true;
+            IsShown = true;
         }
 
+        /// <summary>
+        /// При клике переводит на репозиторий кода в гит хабе
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GitHubLinkLabel__LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) =>
             Process.Start("https://github.com/Skeletor/NoteApp/");
         
-
+        /// <summary>
+        /// При клике переводит на домашнюю страницу mail.ru
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LinkLabel__LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) =>
             Process.Start("https://mail.ru/");
 
-        private void AboutForm_FormClosing(object sender, FormClosingEventArgs e) => isShown = false;
+        /// <summary>
+        /// Происходит при закрытии формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AboutForm_FormClosing(object sender, FormClosingEventArgs e) => IsShown = false;
     }
 }

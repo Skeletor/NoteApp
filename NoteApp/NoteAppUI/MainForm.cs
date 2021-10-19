@@ -22,6 +22,9 @@ namespace NoteAppUI
         /// </summary>
         private Project project;
 
+        /// <summary>
+        /// Происходит при создании формы
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -37,10 +40,10 @@ namespace NoteAppUI
         /// </summary>
         private void FillWithDefault()
         {
-            object[] noteCategory = { NoteCategory.JOB, NoteCategory.HOME, NoteCategory.HEALTH_AND_SPORT,
-                NoteCategory.PEOPLE, NoteCategory.DOCUMENTS, NoteCategory.FINANCE, NoteCategory.OTHER };
+            object[] noteCategory = { NoteCategory.Job, NoteCategory.Home, NoteCategory.HealthAndSport,
+                NoteCategory.People, NoteCategory.Documents, NoteCategory.Finance, NoteCategory.Other };
 
-            NoteCategorySelector.Items.Add("ALL");
+            NoteCategorySelector.Items.Add("All");
             NoteCategorySelector.Items.AddRange(noteCategory);
             NoteCategorySelector.SelectedIndex = 0;
         }
@@ -184,7 +187,7 @@ namespace NoteAppUI
         /// <summary>
         /// Сохранить данные в файл
         /// </summary>
-        private void SaveData() => ProjectManager.SaveToFile(project);
+        private void SaveData() => ProjectManager.SaveTo(project);
 
         /// <summary>
         /// Происходит при закрытии формы
@@ -211,7 +214,7 @@ namespace NoteAppUI
         {
             NoteList.Items.Clear();
 
-            if (NoteCategorySelector.SelectedItem.ToString() == "ALL")
+            if (NoteCategorySelector.SelectedItem.ToString() == "All")
                 foreach (var item in project.Notes)
                     NoteList.Items.Add(item);
             else
@@ -241,8 +244,10 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void AboutMenu_Click(object sender, EventArgs e)
         {
-            if (!AboutForm.isShown)
+            if (!AboutForm.IsShown)
+            {
                 new AboutForm().Show();
+            }
         }
 
         /// <summary>
@@ -277,5 +282,11 @@ namespace NoteAppUI
             NoteList.Items.Clear();
             SaveData();
         }
+
+        private void DescriptionTextBox_Enter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(DescriptionTextBox, "Для редактирования заметки нажмите кнопку \"Edit\" в левом нижнем углу");
+        }
+
     }
 }

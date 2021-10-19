@@ -17,32 +17,12 @@ namespace NoteApp
         private string _name;
 
         /// <summary>
-        /// Категория заметки. Взаимодействует с NoteCategory
-        /// </summary>
-        private NoteCategory _noteCategory;
-
-        /// <summary>
-        /// Текст заметки. Взаимодействует с NoteText
-        /// </summary>
-        private string _noteText;
-
-        /// <summary>
-        /// Время создания заметки. Взаимодействует с CreationTime
-        /// </summary>
-        private DateTime _creationTime;
-
-        /// <summary>
-        /// Время последнего изменения заметки. Взаимодействует с LastModifyTime
-        /// </summary>
-        private DateTime _lastModifyTime;
-
-        /// <summary>
         /// Конструктор, вызываемый при создании экземпляра класса "Заметки"
         /// </summary>
         /// <param name="name">Входящий параметр, определяющий заголовок заметки (необяз.)</param>
         /// <param name="noteText">Входящий параметр, определяющий текст заметки (необяз.)</param>
         /// <param name="noteCategory">Входящий параметр, определяющий категорию заметки (необяз.)</param>
-        public Note(string name = "Без названия", string noteText = "", NoteCategory noteCategory = NoteCategory.OTHER)
+        public Note(string name = "Без названия", string noteText = "", NoteCategory noteCategory = NoteCategory.Other)
         {
             Name = name;
             NoteText = noteText;
@@ -60,46 +40,36 @@ namespace NoteApp
             get { return _name; } 
             set 
             {
-                if (value.Length <= 50) _name = value;
-                else throw new ArgumentException($"Введенное значение больше 50 символов!");
+                if (value.Length <= 50)
+                {
+                    _name = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Введенное значение больше 50 символов!");
+                }
             }
         }
 
         /// <summary>
         /// Категория заметки
         /// </summary>
-        public NoteCategory NoteCategory
-        { 
-            get { return _noteCategory; }
-            set { _noteCategory = value; }
-        }
+        public NoteCategory NoteCategory { get; set; }
 
         /// <summary>
         /// Текст заметки
         /// </summary>
-        public string NoteText
-        {
-            get { return _noteText; }
-            set { _noteText = value; }
-        }
+        public string NoteText { get; set; }
 
         /// <summary>
         /// Время создания заметки
         /// </summary>
-        public DateTime CreationTime 
-        { 
-            get { return _creationTime; }
-            set { _creationTime = value; }
-        }
+        public DateTime CreationTime { get; set; }
         
         /// <summary>
         /// Время последнего изменения заметки
         /// </summary>
-        public DateTime LastModifyTime
-        {
-            get { return _lastModifyTime; }
-            set { _lastModifyTime = value; }
-        }
+        public DateTime LastModifyTime { get; set; }
 
         /// <summary>
         /// Метод, осуществляющий создание копии выбранной заметки
@@ -121,14 +91,16 @@ namespace NoteApp
         /// Сравнивает значения двух заметок
         /// </summary>
         /// <param name="obj">Заметка, с которой идет сравнение</param>
-        /// <returns>true, если все поля одной заметки совпадают с другой. Иначе - false</returns>
+        /// <returns>true, если все поля одной заметки совпадают с другой, иначе - false</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is Note other))
+            {
                 return false;
+            }
 
-            return (Name == other.Name && NoteText == other.NoteText && NoteCategory == other.NoteCategory && 
-                CreationTime == other.CreationTime && LastModifyTime == other.LastModifyTime);
+            return Name == other.Name && NoteText == other.NoteText && NoteCategory == other.NoteCategory && 
+                CreationTime == other.CreationTime && LastModifyTime == other.LastModifyTime;
         }
 
         /// <summary>

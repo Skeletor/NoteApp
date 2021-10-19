@@ -14,17 +14,32 @@ namespace NoteApp
     public static class ProjectManager
     {
         /// <summary>
-        /// Путь к конфигу JSON
+        /// Путь к папке с файлом
         /// </summary>
-        private static readonly string configPath = $"{Environment.CurrentDirectory}\\dataConfig.json";
+        private static string FolderPath { get; } = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\NoteApp\";
+
+        /// <summary>
+        /// Название файла
+        /// </summary>
+        private static string FileName { get; } = "NoteList.json";
 
         /// <summary>
         /// Сохранение проекта в файл
         /// </summary>
         /// <param name="project">Проект, содержащий список заметок</param>
-        public static void SaveToFile(Project project)
+        public static void SaveTo(Project project)
         {
-            using (StreamWriter sw = new StreamWriter(configPath))
+            if (!Directory.Exists(FolderPath))
+            {
+                Directory.CreateDirectory(FolderPath);
+            }
+
+            if (!File.Exists(FileName))
+            {
+                File.Create(FileName);
+            }
+
+            using (StreamWriter sw = new StreamWriter(FolderPath + FileName))
             using (JsonWriter jr = new JsonTextWriter(sw))
             {
                 new JsonSerializer().Serialize(jr, project);
@@ -37,10 +52,28 @@ namespace NoteApp
         /// <returns>Новый экземпляр класса Project</returns>
         public static Project LoadFrom()
         {
-            using (StreamReader sr = new StreamReader(configPath))
+            if (!Directory.Exists(FolderPath))
+            {
+                Directory.CreateDirectory(FolderPath);
+            }
+
+            if (!File.Exists(FileName))
+            {
+                return new Project();
+            }
+
+            using (StreamReader sr = new StreamReader(FolderPath + FileName))
             using (JsonReader jr = new JsonTextReader(sr))
             {
-                return new JsonSerializer().Deserialize<Project>(jr);
+                JsonSerializer jserializer = new JsonSerializer();
+                Project proj = jserializer.Deserialize<Project>(jr);
+
+                if (proj == null)
+                {
+                    return new Project();
+                }
+
+                return proj;
             }
         }
     }

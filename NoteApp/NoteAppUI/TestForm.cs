@@ -47,9 +47,9 @@ namespace NoteAppUI
             project.Notes.Add(new Note());
             project.Notes.Add(new Note("test_title"));
             project.Notes.Add(new Note("test_title1", "test_description"));
-            project.Notes.Add(new Note("test_title2", "test_description", NoteCategory.OTHER));
+            project.Notes.Add(new Note("test_title2", "test_description", NoteCategory.Other));
 
-            ProjectManager.SaveToFile(project);
+            ProjectManager.SaveTo(project);
             Project p = ProjectManager.LoadFrom();
 
             // Проверка таймера
