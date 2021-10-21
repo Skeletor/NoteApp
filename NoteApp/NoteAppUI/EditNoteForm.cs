@@ -17,14 +17,14 @@ namespace NoteAppUI
     public partial class EditNoteForm : Form
     {
         /// <summary>
-        /// Текущий индекс заметки в списке
-        /// </summary>
-        private int _noteIndex = -1;
-
-        /// <summary>
         /// Стандартное название заголовка
         /// </summary>
         private readonly string _defaultName = "Без названия";
+
+        /// <summary>
+        /// Текущий индекс заметки в списке
+        /// </summary>
+        private int NoteIndex { get; set; } = -1;
 
         /// <summary>
         /// Временная переменная, куда помещается только что созданная/отредактированная заметка
@@ -34,7 +34,7 @@ namespace NoteAppUI
         /// <summary>
         /// Список заметок, загружаемый из файла
         /// </summary>
-        private Project Notes { get; set; } = ProjectManager.LoadFrom();
+        private Project ListNotes { get; set; } = ProjectManager.LoadFrom();
 
         /// <summary>
         /// Происходит при создании формы
@@ -104,16 +104,17 @@ namespace NoteAppUI
                 {
                     if (IsNoteInCollection(NewNote))
                     {
-                        if (!WasEdited(NewNote))
+                        if (!WasNoteEdited(NewNote))
+                        {
                             SaveAndClose();
-
+                        }
                         else
                         {
                             NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
                                 (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                            Notes.Notes.RemoveAt(_noteIndex);
-                            Notes.Notes.Insert(_noteIndex, NewNote);
+                            ListNotes.Notes.RemoveAt(NoteIndex);
+                            ListNotes.Notes.Insert(NoteIndex, NewNote);
                         }
                     }
                     else
@@ -123,7 +124,7 @@ namespace NoteAppUI
                         NewNote = ChangeNewNoteAttributes(_defaultName, DescriptionTextBox.Text,
                             (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                        Notes.Notes.Insert(0, NewNote);
+                        ListNotes.Notes.Insert(0, NewNote);
                     }
 
                     SaveAndClose();
@@ -135,16 +136,17 @@ namespace NoteAppUI
                 {
                     if (IsNoteInCollection(NewNote))
                     {
-                        if (!WasEdited(NewNote))
+                        if (!WasNoteEdited(NewNote))
+                        {
                             SaveAndClose();
-
+                        }
                         else
                         {
                             NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
                                 (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                            Notes.Notes.RemoveAt(_noteIndex);
-                            Notes.Notes.Insert(_noteIndex, NewNote);
+                            ListNotes.Notes.RemoveAt(NoteIndex);
+                            ListNotes.Notes.Insert(NoteIndex, NewNote);
                         }
                     }
                     else
@@ -154,7 +156,7 @@ namespace NoteAppUI
                         NewNote = ChangeNewNoteAttributes(TitleTextBox.Text, DescriptionTextBox.Text,
                             (NoteCategory)(CategorySelector.SelectedIndex + 1));
 
-                        Notes.Notes.Insert(0, NewNote);
+                        ListNotes.Notes.Insert(0, NewNote);
                     }
                 }
                 catch (Exception ex)
@@ -168,12 +170,13 @@ namespace NoteAppUI
 
         }
 
+        
         /// <summary>
         /// Проверяет, была ли изменена заметка
         /// </summary>
         /// <param name="note">Заметка, которая проверяется</param>
         /// <returns>true, если было изменение, иначе - false</returns>
-        private bool WasEdited(Note note)
+        private bool WasNoteEdited(Note note)
         {
             if (note.Name == TitleTextBox.Text && note.NoteText == DescriptionTextBox.Text &&
                 note.NoteCategory == (NoteCategory)(CategorySelector.SelectedIndex + 1)) return false;
@@ -214,7 +217,7 @@ namespace NoteAppUI
         /// </summary>
         private void SaveAndClose()
         {
-            ProjectManager.SaveTo(Notes);
+            ProjectManager.SaveTo(ListNotes);
             this.Close();
         }
 
@@ -225,12 +228,11 @@ namespace NoteAppUI
         /// <returns>true, если есть в списке, иначе - false</returns>
         private bool IsNoteInCollection(Note note)
         {
-            foreach (var item in Notes.Notes)
-                if (item.Equals(note))
-                {
-                    _noteIndex = Notes.Notes.IndexOf(item);
-                    return true;
-                }
+            foreach (var item in ListNotes.Notes.Where(item => item.Equals(note)))
+            {
+                NoteIndex = ListNotes.Notes.IndexOf(item);
+                return true;
+            }
 
             return false;
         }

@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace NoteAppUI
 {
+    /// <summary>
+    /// Форма, отображающая информацию о программе, создателе и пр.
+    /// </summary>
     public partial class AboutForm : Form
     {
         /// <summary>

@@ -85,7 +85,7 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ModifyTimeLabel_.AutoSize = true;
             this.ModifyTimeLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ModifyTimeLabel_.Location = new System.Drawing.Point(234, 78);
+            this.ModifyTimeLabel_.Location = new System.Drawing.Point(244, 78);
             this.ModifyTimeLabel_.Name = "ModifyTimeLabel_";
             this.ModifyTimeLabel_.Size = new System.Drawing.Size(125, 18);
             this.ModifyTimeLabel_.TabIndex = 3;
@@ -101,7 +101,7 @@ namespace NoteAppUI
             this.CategorySelector.MaximumSize = new System.Drawing.Size(200, 0);
             this.CategorySelector.MinimumSize = new System.Drawing.Size(125, 0);
             this.CategorySelector.Name = "CategorySelector";
-            this.CategorySelector.Size = new System.Drawing.Size(125, 24);
+            this.CategorySelector.Size = new System.Drawing.Size(130, 24);
             this.CategorySelector.TabIndex = 7;
             // 
             // TitleTextBox
@@ -135,11 +135,11 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CreationTimeDisplayer.Location = new System.Drawing.Point(91, 77);
-            this.CreationTimeDisplayer.MaximumSize = new System.Drawing.Size(125, 22);
+            this.CreationTimeDisplayer.MaximumSize = new System.Drawing.Size(130, 22);
             this.CreationTimeDisplayer.MinimumSize = new System.Drawing.Size(100, 22);
             this.CreationTimeDisplayer.Name = "CreationTimeDisplayer";
             this.CreationTimeDisplayer.ReadOnly = true;
-            this.CreationTimeDisplayer.Size = new System.Drawing.Size(125, 22);
+            this.CreationTimeDisplayer.Size = new System.Drawing.Size(130, 22);
             this.CreationTimeDisplayer.TabIndex = 9;
             // 
             // ModifyTimeDisplayer
@@ -147,7 +147,7 @@ namespace NoteAppUI
             this.ModifyTimeDisplayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ModifyTimeDisplayer.Location = new System.Drawing.Point(375, 77);
+            this.ModifyTimeDisplayer.Location = new System.Drawing.Point(385, 77);
             this.ModifyTimeDisplayer.MaximumSize = new System.Drawing.Size(125, 22);
             this.ModifyTimeDisplayer.MinimumSize = new System.Drawing.Size(100, 22);
             this.ModifyTimeDisplayer.Name = "ModifyTimeDisplayer";

@@ -83,7 +83,7 @@ namespace NoteAppUI
             // 
             this.LinkLabel_.AutoSize = true;
             this.LinkLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LinkLabel_.Location = new System.Drawing.Point(91, 154);
+            this.LinkLabel_.Location = new System.Drawing.Point(105, 154);
             this.LinkLabel_.Name = "LinkLabel_";
             this.LinkLabel_.Size = new System.Drawing.Size(179, 20);
             this.LinkLabel_.TabIndex = 4;
@@ -94,9 +94,10 @@ namespace NoteAppUI
             // GitHubLabel_
             // 
             this.GitHubLabel_.AutoSize = true;
-            this.GitHubLabel_.Location = new System.Drawing.Point(32, 183);
+            this.GitHubLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GitHubLabel_.Location = new System.Drawing.Point(31, 183);
             this.GitHubLabel_.Name = "GitHubLabel_";
-            this.GitHubLabel_.Size = new System.Drawing.Size(56, 17);
+            this.GitHubLabel_.Size = new System.Drawing.Size(67, 20);
             this.GitHubLabel_.TabIndex = 5;
             this.GitHubLabel_.Text = "GitHub:";
             this.GitHubLabel_.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -105,7 +106,7 @@ namespace NoteAppUI
             // 
             this.GitHubLinkLabel_.AutoSize = true;
             this.GitHubLinkLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GitHubLinkLabel_.Location = new System.Drawing.Point(91, 180);
+            this.GitHubLinkLabel_.Location = new System.Drawing.Point(105, 183);
             this.GitHubLinkLabel_.Name = "GitHubLinkLabel_";
             this.GitHubLinkLabel_.Size = new System.Drawing.Size(144, 20);
             this.GitHubLinkLabel_.TabIndex = 6;

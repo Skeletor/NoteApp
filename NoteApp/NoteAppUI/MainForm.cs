@@ -20,7 +20,7 @@ namespace NoteAppUI
         /// <summary>
         /// Хранилище всех заметок
         /// </summary>
-        private Project project;
+        private Project Proj { get; set; }
 
         /// <summary>
         /// Происходит при создании формы
@@ -55,19 +55,22 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            EditNoteForm editForm = new EditNoteForm();
-
-            editForm.FormClosing += (s, e1) =>
+            using (EditNoteForm editForm = new EditNoteForm())
             {
-                if (editForm.NewNote != null)
-                    NoteList.Items.Insert(0, editForm.NewNote.Name);
+                editForm.FormClosing += (s, e1) =>
+                {
+                    if (editForm.NewNote != null)
+                    {
+                        NoteList.Items.Insert(0, editForm.NewNote.Name);
+                    }
 
-                UpdateNoteList();
-                SortByCategory();
-                NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
-            };
+                    UpdateNoteList();
+                    SortByCategory();
+                    NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
+                };
 
-            editForm.ShowDialog();
+                editForm.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -82,19 +85,22 @@ namespace NoteAppUI
 
             noteIndex = noteFromList is null ? 0 : NoteList.Items.IndexOf(noteFromList);
 
-            EditNoteForm editForm = new EditNoteForm(noteFromList);
-
-            editForm.FormClosing += (s, e1) =>
+            using (EditNoteForm editForm = new EditNoteForm(noteFromList))
             {
-                if (editForm.NewNote != null)
-                    NoteList.Items.Insert(noteIndex, editForm.NewNote);
+                editForm.FormClosing += (s, e1) =>
+                {
+                    if (editForm.NewNote != null)
+                    {
+                        NoteList.Items.Insert(noteIndex, editForm.NewNote);
+                    }
 
-                UpdateNoteList();
-                SortByCategory();
-                NoteList.SelectedIndex = NoteList.Items.Count > 0 ? noteIndex : -1;
-            };
+                    UpdateNoteList();
+                    SortByCategory();
+                    NoteList.SelectedIndex = NoteList.Items.Count > 0 ? noteIndex : -1;
+                };
 
-            editForm.ShowDialog();
+                editForm.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -112,13 +118,15 @@ namespace NoteAppUI
                     DialogResult.OK)
                 {
                     NoteList.Items.RemoveAt(index);
-                    project.Notes.RemoveAt(index);
+                    Proj.Notes.RemoveAt(index);
                 }
 
                 SaveData();
             }
             else
+            {
                 MessageBox.Show("Не выбрана заметка для удаления", "Удаление");
+            }
         }
 
         /// <summary>
@@ -132,7 +140,6 @@ namespace NoteAppUI
             {
                 splitContainer1.Panel2.Show();
                 ActivateButtons(true);
-
                 FillPanel2(noteFromList);
             }
             else
@@ -162,8 +169,8 @@ namespace NoteAppUI
         {
             LoadData();
             NoteList.Items.Clear();
-            
-            foreach (var item in project.Notes)
+
+            foreach (var item in Proj.Notes)
             {
                 NoteList.Items.Add(item);
             }
@@ -182,12 +189,12 @@ namespace NoteAppUI
         /// <summary>
         /// Загрузить данные с файла
         /// </summary>
-        private void LoadData() => project = ProjectManager.LoadFrom();
+        private void LoadData() => Proj = ProjectManager.LoadFrom();
 
         /// <summary>
         /// Сохранить данные в файл
         /// </summary>
-        private void SaveData() => ProjectManager.SaveTo(project);
+        private void SaveData() => ProjectManager.SaveTo(Proj);
 
         /// <summary>
         /// Происходит при закрытии формы
@@ -215,12 +222,22 @@ namespace NoteAppUI
             NoteList.Items.Clear();
 
             if (NoteCategorySelector.SelectedItem.ToString() == "All")
-                foreach (var item in project.Notes)
+            {
+                foreach (var item in Proj.Notes)
+                {
                     NoteList.Items.Add(item);
+                }
+            }
             else
-                foreach (var item in project.Notes)
+            {
+                foreach (var item in Proj.Notes)
+                {
                     if (item.NoteCategory == (NoteCategory)NoteCategorySelector.SelectedIndex)
+                    {
                         NoteList.Items.Add(item);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -257,13 +274,13 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            project = ProjectManager.LoadFrom();
+            Proj = ProjectManager.LoadFrom();
             string defaultName = "Без названия";
 
             for (int i = 0; i < 201; ++i)
-                project.Notes.Add(new Note(defaultName + i.ToString()));
+                Proj.Notes.Add(new Note(defaultName + i.ToString()));
 
-            foreach (var item in project.Notes)
+            foreach (var item in Proj.Notes)
             {
                 NoteList.Items.Add(item);
             }
@@ -278,7 +295,7 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            project.Notes.Clear();
+            Proj.Notes.Clear();
             NoteList.Items.Clear();
             SaveData();
         }

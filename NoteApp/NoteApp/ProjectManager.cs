@@ -68,12 +68,7 @@ namespace NoteApp
                 JsonSerializer jserializer = new JsonSerializer();
                 Project proj = jserializer.Deserialize<Project>(jr);
 
-                if (proj == null)
-                {
-                    return new Project();
-                }
-
-                return proj;
+                return proj ?? new Project();
             }
         }
     }
