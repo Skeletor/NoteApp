@@ -53,7 +53,7 @@ namespace NoteAppUI
             this.CreatedLabel_ = new System.Windows.Forms.Label();
             this.CategoryLabelStatic_ = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -325,9 +325,9 @@ namespace NoteAppUI
             // 
             // toolTip1
             // 
-            this.toolTip1.AutoPopDelay = 4000;
-            this.toolTip1.InitialDelay = 100;
-            this.toolTip1.ReshowDelay = 100;
+            this.toolTip.AutoPopDelay = 4000;
+            this.toolTip.InitialDelay = 100;
+            this.toolTip.ReshowDelay = 100;
             // 
             // MainForm
             // 
@@ -379,7 +379,7 @@ namespace NoteAppUI
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

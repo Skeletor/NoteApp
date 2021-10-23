@@ -33,9 +33,9 @@ namespace NoteAppUI
             this.VersionLabel_ = new System.Windows.Forms.Label();
             this.AuthorLabel_ = new System.Windows.Forms.Label();
             this.EmailLabel_ = new System.Windows.Forms.Label();
-            this.LinkLabel_ = new System.Windows.Forms.LinkLabel();
+            this.LinkLabel = new System.Windows.Forms.LinkLabel();
             this.GitHubLabel_ = new System.Windows.Forms.Label();
-            this.GitHubLinkLabel_ = new System.Windows.Forms.LinkLabel();
+            this.GitHubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -79,17 +79,17 @@ namespace NoteAppUI
             this.EmailLabel_.TabIndex = 3;
             this.EmailLabel_.Text = "email:";
             // 
-            // LinkLabel_
+            // LinkLabel
             // 
-            this.LinkLabel_.AutoSize = true;
-            this.LinkLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LinkLabel_.Location = new System.Drawing.Point(105, 154);
-            this.LinkLabel_.Name = "LinkLabel_";
-            this.LinkLabel_.Size = new System.Drawing.Size(179, 20);
-            this.LinkLabel_.TabIndex = 4;
-            this.LinkLabel_.TabStop = true;
-            this.LinkLabel_.Text = "belovruslan15@mail.ru";
-            this.LinkLabel_.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel__LinkClicked);
+            this.LinkLabel.AutoSize = true;
+            this.LinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LinkLabel.Location = new System.Drawing.Point(105, 154);
+            this.LinkLabel.Name = "LinkLabel";
+            this.LinkLabel.Size = new System.Drawing.Size(179, 20);
+            this.LinkLabel.TabIndex = 4;
+            this.LinkLabel.TabStop = true;
+            this.LinkLabel.Text = "belovruslan15@mail.ru";
+            this.LinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // GitHubLabel_
             // 
@@ -102,17 +102,17 @@ namespace NoteAppUI
             this.GitHubLabel_.Text = "GitHub:";
             this.GitHubLabel_.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // GitHubLinkLabel_
+            // GitHubLinkLabel
             // 
-            this.GitHubLinkLabel_.AutoSize = true;
-            this.GitHubLinkLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GitHubLinkLabel_.Location = new System.Drawing.Point(105, 183);
-            this.GitHubLinkLabel_.Name = "GitHubLinkLabel_";
-            this.GitHubLinkLabel_.Size = new System.Drawing.Size(144, 20);
-            this.GitHubLinkLabel_.TabIndex = 6;
-            this.GitHubLinkLabel_.TabStop = true;
-            this.GitHubLinkLabel_.Text = "Skeletor/NoteApp/";
-            this.GitHubLinkLabel_.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GitHubLinkLabel__LinkClicked);
+            this.GitHubLinkLabel.AutoSize = true;
+            this.GitHubLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GitHubLinkLabel.Location = new System.Drawing.Point(105, 183);
+            this.GitHubLinkLabel.Name = "GitHubLinkLabel";
+            this.GitHubLinkLabel.Size = new System.Drawing.Size(144, 20);
+            this.GitHubLinkLabel.TabIndex = 6;
+            this.GitHubLinkLabel.TabStop = true;
+            this.GitHubLinkLabel.Text = "Skeletor/NoteApp/";
+            this.GitHubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GitHubLinkLabel_LinkClicked);
             // 
             // label1
             // 
@@ -129,9 +129,9 @@ namespace NoteAppUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 303);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.GitHubLinkLabel_);
+            this.Controls.Add(this.GitHubLinkLabel);
             this.Controls.Add(this.GitHubLabel_);
-            this.Controls.Add(this.LinkLabel_);
+            this.Controls.Add(this.LinkLabel);
             this.Controls.Add(this.EmailLabel_);
             this.Controls.Add(this.AuthorLabel_);
             this.Controls.Add(this.VersionLabel_);
@@ -153,9 +153,9 @@ namespace NoteAppUI
         private System.Windows.Forms.Label VersionLabel_;
         private System.Windows.Forms.Label AuthorLabel_;
         private System.Windows.Forms.Label EmailLabel_;
-        private System.Windows.Forms.LinkLabel LinkLabel_;
+        private System.Windows.Forms.LinkLabel LinkLabel;
         private System.Windows.Forms.Label GitHubLabel_;
-        private System.Windows.Forms.LinkLabel GitHubLinkLabel_;
+        private System.Windows.Forms.LinkLabel GitHubLinkLabel;
         private System.Windows.Forms.Label label1;
     }
 }

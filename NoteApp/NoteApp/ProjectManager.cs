@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace NoteApp
 {
     /// <summary>
-    /// Сервисный класс, предоставляющий методы для сериализации/десериализации класса "Проект"
+    /// Сервисный класс, предоставляющий методы для сериализации/десериализации класса "Project"
     /// </summary>
     public static class ProjectManager
     {

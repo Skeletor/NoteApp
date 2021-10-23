@@ -18,7 +18,7 @@ namespace NoteAppUI
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Хранилище всех заметок
+        /// Переменная для хранения всех заметок
         /// </summary>
         private Project Proj { get; set; }
 
@@ -36,7 +36,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Заполнение некоторых элементов стендартными значениями
+        /// Заполнение некоторых элементов стандартными значениями
         /// </summary>
         private void FillWithDefault()
         {
@@ -300,9 +300,14 @@ namespace NoteAppUI
             SaveData();
         }
 
+        /// <summary>
+        /// Происходит, когда пользователь пытается нажать на окно описания заметки для ее редактирования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DescriptionTextBox_Enter(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(DescriptionTextBox, "Для редактирования заметки нажмите кнопку \"Edit\" в левом нижнем углу");
+            toolTip.SetToolTip(DescriptionTextBox, "Для редактирования заметки нажмите кнопку \"Edit\" в левом нижнем углу");
         }
 
     }

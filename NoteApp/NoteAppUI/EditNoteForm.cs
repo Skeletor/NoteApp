@@ -22,19 +22,25 @@ namespace NoteAppUI
         private readonly string _defaultName = "Без названия";
 
         /// <summary>
+        /// Цвет для отрисовки прямоугольника вокруг заголовка заметки
+        /// </summary>
+        private readonly MyColorClass _myColor = new MyColorClass();
+
+        /// <summary>
         /// Текущий индекс заметки в списке
         /// </summary>
         private int NoteIndex { get; set; } = -1;
 
         /// <summary>
-        /// Временная переменная, куда помещается только что созданная/отредактированная заметка
+        /// Список заметок, загружаемых из файла
+        /// </summary>
+        private Project ListNotes { get; set; } = ProjectManager.LoadFrom();
+
+        /// <summary>
+        /// Только что созданная/отредактированная заметка
         /// </summary>
         public Note NewNote { get; private set; }
 
-        /// <summary>
-        /// Список заметок, загружаемый из файла
-        /// </summary>
-        private Project ListNotes { get; set; } = ProjectManager.LoadFrom();
 
         /// <summary>
         /// Происходит при создании формы
@@ -170,7 +176,6 @@ namespace NoteAppUI
 
         }
 
-        
         /// <summary>
         /// Проверяет, была ли изменена заметка
         /// </summary>
@@ -179,7 +184,10 @@ namespace NoteAppUI
         private bool WasNoteEdited(Note note)
         {
             if (note.Name == TitleTextBox.Text && note.NoteText == DescriptionTextBox.Text &&
-                note.NoteCategory == (NoteCategory)(CategorySelector.SelectedIndex + 1)) return false;
+                note.NoteCategory == (NoteCategory)(CategorySelector.SelectedIndex + 1))
+            { 
+                return false; 
+            }
 
             return true;
         }
@@ -218,7 +226,7 @@ namespace NoteAppUI
         private void SaveAndClose()
         {
             ProjectManager.SaveTo(ListNotes);
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -228,10 +236,13 @@ namespace NoteAppUI
         /// <returns>true, если есть в списке, иначе - false</returns>
         private bool IsNoteInCollection(Note note)
         {
-            foreach (var item in ListNotes.Notes.Where(item => item.Equals(note)))
+            foreach (var item in ListNotes.Notes)
             {
-                NoteIndex = ListNotes.Notes.IndexOf(item);
-                return true;
+                if (item.Equals(note))
+                {
+                    NoteIndex = ListNotes.Notes.IndexOf(item);
+                    return true;
+                }
             }
 
             return false;
@@ -244,9 +255,99 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            TitleTextBox.ForeColor = TitleTextBox.Text.Length > 50 ? Color.Red : Color.Black;
+            if (TitleTextBox.Text.Length > 50)
+            {
+                StartRainbow();
+            }
+            else
+            {
+                StopRainbow();
+            }
         }
 
-        
+        /// <summary>
+        /// Начинает отрисовку прямоугольника вокруг TitleTextBox
+        /// </summary>
+        private void OnDraw()
+        {
+            Color drawColor = new Color();
+
+            switch (_myColor.CurrentColor)
+            {
+                case MyColorClass.Colors.Red:
+                    drawColor = Color.Red;
+                    break;
+
+                case MyColorClass.Colors.Orange:
+                    drawColor = Color.Orange;
+                    break;
+
+                case MyColorClass.Colors.Yellow:
+                    drawColor = Color.Yellow;
+                    break;
+
+                case MyColorClass.Colors.Green:
+                    drawColor = Color.Green;
+                    break;
+
+                case MyColorClass.Colors.LightBlue:
+                    drawColor = Color.LightBlue;
+                    break;
+
+                case MyColorClass.Colors.Blue:
+                    drawColor = Color.Blue;
+                    break;
+
+                case MyColorClass.Colors.Violet:
+                    drawColor = Color.Violet;
+                    break;
+            }
+
+            using (Graphics g = Graphics.FromHwnd(Handle))
+            {
+                g.DrawRectangle(new Pen(drawColor, 3), TitleTextBox.Location.X, TitleTextBox.Location.Y,
+                    TitleTextBox.Width, TitleTextBox.Height);
+            }
+
+            _myColor.ColorNext();
+        }
+
+        /// <summary>
+        /// Очищает нарисованную область
+        /// </summary>
+        private void OnClear()
+        {
+            using (Graphics g = Graphics.FromHwnd(Handle))
+            {
+                g.Clear(BackColor);
+            }
+        }
+
+        /// <summary>
+        /// Происходит через каждый Tick таймера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChangeColorTimer_Tick(object sender, EventArgs e) => OnDraw();
+
+        /// <summary>
+        /// Обёртка для метода OnDraw()
+        /// </summary>
+        private void StartRainbow()
+        {
+            ChangeColorTimer.Enabled = true;
+            OnDraw();
+            TitleTextBox.ForeColor = Color.Red;
+        }
+
+        /// <summary>
+        /// Обёртка для метода OnClear()
+        /// </summary>
+        private void StopRainbow()
+        {
+            ChangeColorTimer.Enabled = false;
+            OnClear();
+            TitleTextBox.ForeColor = Color.Black;
+        }
     }
 }

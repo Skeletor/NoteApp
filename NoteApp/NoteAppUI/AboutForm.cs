@@ -27,7 +27,7 @@ namespace NoteAppUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void GitHubLinkLabel__LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) =>
+        private void GitHubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) =>
             Process.Start("https://github.com/Skeletor/NoteApp/");
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace NoteAppUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LinkLabel__LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) =>
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) =>
             Process.Start("https://mail.ru/");
 
         /// <summary>

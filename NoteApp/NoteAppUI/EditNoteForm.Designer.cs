@@ -29,6 +29,7 @@ namespace NoteAppUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TitleLabel_ = new System.Windows.Forms.Label();
             this.CategoryLabel_ = new System.Windows.Forms.Label();
             this.CreatedLabel_ = new System.Windows.Forms.Label();
@@ -40,6 +41,7 @@ namespace NoteAppUI
             this.ModifyTimeDisplayer = new System.Windows.Forms.TextBox();
             this.OKButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.ChangeColorTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // TitleLabel_
@@ -179,6 +181,11 @@ namespace NoteAppUI
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // ChangeColorTimer
+            // 
+            this.ChangeColorTimer.Interval = 333;
+            this.ChangeColorTimer.Tick += new System.EventHandler(this.ChangeColorTimer_Tick);
+            // 
             // EditNoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -217,5 +224,6 @@ namespace NoteAppUI
         private System.Windows.Forms.TextBox ModifyTimeDisplayer;
         private System.Windows.Forms.Button OKButton;
         private new System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Timer ChangeColorTimer;
     }
 }
