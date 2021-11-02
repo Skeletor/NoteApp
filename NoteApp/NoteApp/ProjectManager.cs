@@ -62,14 +62,22 @@ namespace NoteApp
                 return new Project();
             }
 
-            using (StreamReader sr = new StreamReader(FolderPath + FileName))
-            using (JsonReader jr = new JsonTextReader(sr))
+            try
             {
-                JsonSerializer jserializer = new JsonSerializer();
-                Project proj = jserializer.Deserialize<Project>(jr);
+                using (StreamReader sr = new StreamReader(FolderPath + FileName))
+                using (JsonReader jr = new JsonTextReader(sr))
+                {
+                    JsonSerializer jserializer = new JsonSerializer();
+                    Project proj = jserializer.Deserialize<Project>(jr);
 
-                return proj ?? new Project();
+                    return proj ?? new Project();
+                }
             }
+            catch (Exception)
+            {
+                return new Project();
+            }
+            
         }
     }
 }
