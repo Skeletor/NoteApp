@@ -1,0 +1,20 @@
+﻿
+Проект NoteApp: цикл. сложность = 28
+	1. Класс "Note" = 16
+		Конструктор Note = 1,
+		Свойство Name = 3,
+		Свойство NoteCategory = 2,
+		Свойство NoteText = 2,
+		Свойство CreationTime = 2,
+		Свойство LastModifyTime = 2,
+		Метод Clone = 1,
+		Метод Equals = 2,
+		Метод ToString = 1.
+
+	2. Класс "Project" = 2
+		Свойство Notes = 2.
+
+	3. Класс "ProjectManager" = 10
+		Метод SaveTo = 4,
+		Метод LoadFrom = 6.
+

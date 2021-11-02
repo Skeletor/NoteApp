@@ -24,7 +24,7 @@ namespace NoteAppUI
         /// <summary>
         /// Цвет для отрисовки прямоугольника вокруг заголовка заметки
         /// </summary>
-        private readonly MyColorClass _myColor = new MyColorClass();
+        private readonly MyColorClass _drawColor = new MyColorClass();
 
         /// <summary>
         /// Текущий индекс заметки в списке
@@ -272,7 +272,7 @@ namespace NoteAppUI
         {
             Color drawColor = new Color();
 
-            switch (_myColor.CurrentColor)
+            switch (_drawColor.CurrentColor)
             {
                 case MyColorClass.Colors.Red:
                     drawColor = Color.Red;
@@ -309,7 +309,7 @@ namespace NoteAppUI
                     TitleTextBox.Width, TitleTextBox.Height);
             }
 
-            _myColor.ColorNext();
+            _drawColor.ColorNext();
         }
 
         /// <summary>
