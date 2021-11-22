@@ -10,6 +10,6 @@ namespace NoteAppUnitTests
     [TestFixture]
     public class ProjectManagerTest
     {
-        public void Test_
+        
     }
 }

@@ -43,7 +43,7 @@ namespace NoteAppUI
             // 
             this.TitleLabel_.AutoSize = true;
             this.TitleLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleLabel_.Location = new System.Drawing.Point(29, 22);
+            this.TitleLabel_.Location = new System.Drawing.Point(9, 9);
             this.TitleLabel_.Name = "TitleLabel_";
             this.TitleLabel_.Size = new System.Drawing.Size(140, 36);
             this.TitleLabel_.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace NoteAppUI
             // 
             this.VersionLabel_.AutoSize = true;
             this.VersionLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.VersionLabel_.Location = new System.Drawing.Point(30, 58);
+            this.VersionLabel_.Location = new System.Drawing.Point(12, 45);
             this.VersionLabel_.Name = "VersionLabel_";
             this.VersionLabel_.Size = new System.Drawing.Size(59, 25);
             this.VersionLabel_.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace NoteAppUI
             // 
             this.AuthorLabel_.AutoSize = true;
             this.AuthorLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AuthorLabel_.Location = new System.Drawing.Point(30, 104);
+            this.AuthorLabel_.Location = new System.Drawing.Point(10, 70);
             this.AuthorLabel_.Name = "AuthorLabel_";
             this.AuthorLabel_.Size = new System.Drawing.Size(195, 25);
             this.AuthorLabel_.TabIndex = 2;
@@ -73,7 +73,7 @@ namespace NoteAppUI
             // 
             this.EmailLabel_.AutoSize = true;
             this.EmailLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EmailLabel_.Location = new System.Drawing.Point(31, 154);
+            this.EmailLabel_.Location = new System.Drawing.Point(12, 152);
             this.EmailLabel_.Name = "EmailLabel_";
             this.EmailLabel_.Size = new System.Drawing.Size(54, 20);
             this.EmailLabel_.TabIndex = 3;
@@ -83,7 +83,7 @@ namespace NoteAppUI
             // 
             this.LinkLabel.AutoSize = true;
             this.LinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LinkLabel.Location = new System.Drawing.Point(105, 154);
+            this.LinkLabel.Location = new System.Drawing.Point(84, 152);
             this.LinkLabel.Name = "LinkLabel";
             this.LinkLabel.Size = new System.Drawing.Size(179, 20);
             this.LinkLabel.TabIndex = 4;
@@ -95,7 +95,7 @@ namespace NoteAppUI
             // 
             this.GitHubLabel_.AutoSize = true;
             this.GitHubLabel_.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GitHubLabel_.Location = new System.Drawing.Point(31, 183);
+            this.GitHubLabel_.Location = new System.Drawing.Point(11, 181);
             this.GitHubLabel_.Name = "GitHubLabel_";
             this.GitHubLabel_.Size = new System.Drawing.Size(67, 20);
             this.GitHubLabel_.TabIndex = 5;
@@ -106,7 +106,7 @@ namespace NoteAppUI
             // 
             this.GitHubLinkLabel.AutoSize = true;
             this.GitHubLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GitHubLinkLabel.Location = new System.Drawing.Point(105, 183);
+            this.GitHubLinkLabel.Location = new System.Drawing.Point(84, 181);
             this.GitHubLinkLabel.Name = "GitHubLinkLabel";
             this.GitHubLinkLabel.Size = new System.Drawing.Size(144, 20);
             this.GitHubLinkLabel.TabIndex = 6;
@@ -117,17 +117,17 @@ namespace NoteAppUI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 264);
+            this.label1.Location = new System.Drawing.Point(12, 273);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 17);
+            this.label1.Size = new System.Drawing.Size(141, 17);
             this.label1.TabIndex = 7;
-            this.label1.Text = "2021 Ruslan Belov (c)";
+            this.label1.Text = "2021 Ruslan Belov ©";
             // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 303);
+            this.ClientSize = new System.Drawing.Size(328, 299);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.GitHubLinkLabel);
             this.Controls.Add(this.GitHubLabel_);
@@ -139,6 +139,7 @@ namespace NoteAppUI
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "AboutForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AboutForm_FormClosing);

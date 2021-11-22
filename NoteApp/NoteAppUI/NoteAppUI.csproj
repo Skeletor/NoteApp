@@ -94,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
@@ -117,6 +118,24 @@
       <Project>{59EC1B02-E6A8-4ED9-85BE-9E9A25B4A8A2}</Project>
       <Name>NoteApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_file_icon_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_icon_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_icon_big.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_icon_medium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_icon_big.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

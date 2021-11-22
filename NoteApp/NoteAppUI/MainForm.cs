@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -32,7 +26,7 @@ namespace NoteAppUI
             UpdateNoteList();
             ActivateButtons(false);
 
-            splitContainer1.Panel2.Hide();
+            NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
         }
 
         /// <summary>
@@ -49,7 +43,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Происходит при нажатии на кнопку "New"
+        /// Происходит при нажатии на кнопку "Add"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -114,7 +108,7 @@ namespace NoteAppUI
 
             if (index != -1)
             {
-                if (MessageBox.Show("Удалить выбранную заметку?", "Удаление", MessageBoxButtons.OKCancel) ==
+                if (MessageBox.Show("Delete the selected note?", "Removing", MessageBoxButtons.OKCancel) ==
                     DialogResult.OK)
                 {
                     NoteList.Items.RemoveAt(index);
@@ -125,7 +119,7 @@ namespace NoteAppUI
             }
             else
             {
-                MessageBox.Show("Не выбрана заметка для удаления", "Удаление");
+                MessageBox.Show("No note is chosen to delete", "Removing");
             }
         }
 
@@ -138,13 +132,11 @@ namespace NoteAppUI
         {
             if (NoteList.SelectedItem is Note noteFromList)
             {
-                splitContainer1.Panel2.Show();
                 ActivateButtons(true);
                 FillPanel2(noteFromList);
             }
             else
             {
-                splitContainer1.Panel2.Hide();
                 ActivateButtons(false);
             }
         }
@@ -182,8 +174,11 @@ namespace NoteAppUI
         /// <param name="state">Если true, делает видимыми кнопки, иначе - скрывает</param>
         private void ActivateButtons(bool state)
         {
-            EditButton.Enabled = state;
-            DeleteButton.Enabled = state;
+            if (EditButton.Enabled != state && DeleteButton.Enabled != state)
+            {
+                EditButton.Enabled = state;
+                DeleteButton.Enabled = state;
+            }
         }
 
         /// <summary>
@@ -230,23 +225,14 @@ namespace NoteAppUI
             }
             else
             {
-                foreach (var item in Proj.Notes)
+                foreach (var item in Proj.Notes.Where(item => item.NoteCategory ==
+                    (NoteCategory)NoteCategorySelector.SelectedIndex))
                 {
-                    if (item.NoteCategory == (NoteCategory)NoteCategorySelector.SelectedIndex)
-                    {
-                        NoteList.Items.Add(item);
-                    }
+                    NoteList.Items.Add(item);
                 }
             }
         }
-
-        /// <summary>
-        /// Происходит при нажатии на кнопку "Edit" (сверху)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditMenu_Click(object sender, EventArgs e) => EditButton_Click(sender, e);
-
+        
         /// <summary>
         /// Происходит при нажатии на кнопку "Exit"
         /// </summary>
@@ -268,47 +254,19 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// !!! ТЕСТ-МЕТОД - УДАЛИТЬ ПОСЛЕ ТЕСТОВ !!!
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Proj = ProjectManager.LoadFrom();
-            string defaultName = "Без названия";
-
-            for (int i = 0; i < 201; ++i)
-                Proj.Notes.Add(new Note(defaultName + i.ToString()));
-
-            foreach (var item in Proj.Notes)
-            {
-                NoteList.Items.Add(item);
-            }
-
-            SaveData();
-        }
-
-        /// <summary>
-        /// !!! ТЕСТ-МЕТОД, УДАЛИТЬ ПОСЛЕ ТЕСТОВ !!!
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Proj.Notes.Clear();
-            NoteList.Items.Clear();
-            SaveData();
-        }
-
-        /// <summary>
         /// Происходит, когда пользователь пытается нажать на окно описания заметки для ее редактирования
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DescriptionTextBox_Enter(object sender, EventArgs e)
         {
-            toolTip.SetToolTip(DescriptionTextBox, "Для редактирования заметки нажмите кнопку \"Edit\" в левом нижнем углу");
+            toolTip.SetToolTip(DescriptionTextBox, "In order to redact the note press the \"Edit\" button in the lower left corner");
         }
 
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) => CreateButton_Click(sender, e);
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e) => EditButton_Click(sender, e);
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => DeleteButton_Click(sender, e);
     }
 }

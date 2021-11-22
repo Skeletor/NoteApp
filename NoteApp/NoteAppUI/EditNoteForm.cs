@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -105,8 +99,8 @@ namespace NoteAppUI
         {
             if (TitleTextBox.Text.Trim() == "")
             {
-                if (MessageBox.Show("Попытка сохранить заметку с пустым именем. Будет сохранено как \"Без названия\"",
-                    "Внимание", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("Trying to save the note with the blank title. Will be saved as \"Без названия\"",
+                    "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     if (IsNoteInCollection(NewNote))
                     {
@@ -268,7 +262,7 @@ namespace NoteAppUI
         /// <summary>
         /// Начинает отрисовку прямоугольника вокруг TitleTextBox
         /// </summary>
-        private void OnDraw()
+        private void Draw()
         {
             Color drawColor = new Color();
 
@@ -315,7 +309,7 @@ namespace NoteAppUI
         /// <summary>
         /// Очищает нарисованную область
         /// </summary>
-        private void OnClear()
+        private void Clear()
         {
             using (Graphics g = Graphics.FromHwnd(Handle))
             {
@@ -328,7 +322,7 @@ namespace NoteAppUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChangeColorTimer_Tick(object sender, EventArgs e) => OnDraw();
+        private void ChangeColorTimer_Tick(object sender, EventArgs e) => Draw();
 
         /// <summary>
         /// Обёртка для метода OnDraw()
@@ -336,7 +330,7 @@ namespace NoteAppUI
         private void StartRainbow()
         {
             ChangeColorTimer.Enabled = true;
-            OnDraw();
+            Draw();
             TitleTextBox.ForeColor = Color.Red;
         }
 
@@ -346,7 +340,7 @@ namespace NoteAppUI
         private void StopRainbow()
         {
             ChangeColorTimer.Enabled = false;
-            OnClear();
+            Clear();
             TitleTextBox.ForeColor = Color.Black;
         }
     }
