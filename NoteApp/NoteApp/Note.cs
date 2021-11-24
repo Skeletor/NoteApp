@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoteApp
 {
@@ -37,37 +33,38 @@ namespace NoteApp
         /// </summary>
         public string Name 
         {
-            get { return _name; } 
+            get 
+            { 
+                return _name; 
+            } 
             set 
             {
-                if (value.Length <= 50)
-                {
-                    _name = value;
-                }
-                else
+                if (value.Length > 50)
                 {
                     throw new ArgumentException("Введенное значение больше 50 символов!");
                 }
+                
+                _name = value;
             }
         }
 
         /// <summary>
-        /// Категория заметки
+        /// Возвращает или задает категорию заметки
         /// </summary>
         public NoteCategory NoteCategory { get; set; }
 
         /// <summary>
-        /// Текст заметки
+        /// Возвращает или задает текст заметки
         /// </summary>
         public string NoteText { get; set; }
 
         /// <summary>
-        /// Время создания заметки
+        /// Возвращает или задает время создания заметки
         /// </summary>
         public DateTime CreationTime { get; set; }
         
         /// <summary>
-        /// Время последнего изменения заметки
+        /// Возвращает или задает время последнего изменения заметки
         /// </summary>
         public DateTime LastModifyTime { get; set; }
 
@@ -99,7 +96,7 @@ namespace NoteApp
                 return false;
             }
 
-            return Name == other.Name && NoteText == other.NoteText && NoteCategory == other.NoteCategory && 
+            return Name == other.Name && NoteText == other.NoteText && NoteCategory == other.NoteCategory &&
                 CreationTime == other.CreationTime && LastModifyTime == other.LastModifyTime;
         }
 

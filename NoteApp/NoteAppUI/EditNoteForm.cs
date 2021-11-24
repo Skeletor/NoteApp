@@ -35,7 +35,6 @@ namespace NoteAppUI
         /// </summary>
         public Note NewNote { get; private set; }
 
-
         /// <summary>
         /// Происходит при создании формы
         /// </summary>
@@ -80,10 +79,16 @@ namespace NoteAppUI
         /// </summary>
         private void FillWithDefault()
         {
-            object[] categories = { NoteCategory.Job, NoteCategory.Home, NoteCategory.HealthAndSport,
-            NoteCategory.People, NoteCategory.Documents, NoteCategory.Finance, NoteCategory.Other };
+            CategorySelector.Items.AddRange(new object[] {
+                NoteCategory.Job,
+                NoteCategory.Home,
+                NoteCategory.HealthAndSport,
+                NoteCategory.People,
+                NoteCategory.Documents,
+                NoteCategory.Finance,
+                NoteCategory.Other
+            });
 
-            CategorySelector.Items.AddRange(categories);
             CategorySelector.SelectedIndex = 0;
 
             CreationTimeDisplayer.Text = DateTime.Now.ToString("g");
@@ -99,8 +104,8 @@ namespace NoteAppUI
         {
             if (TitleTextBox.Text.Trim() == "")
             {
-                if (MessageBox.Show("Trying to save the note with the blank title. Will be saved as \"Без названия\"",
-                    "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("Trying to save the note with the blank title. Will be saved as " +
+                    "\"Без названия\"", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     if (IsNoteInCollection(NewNote))
                     {
@@ -247,59 +252,50 @@ namespace NoteAppUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TitleTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (TitleTextBox.Text.Length > 50)
-            {
-                StartRainbow();
-            }
-            else
-            {
-                StopRainbow();
-            }
-        }
-
+        private void TitleTextBox_TextChanged(object sender, EventArgs e) => 
+            DoRainbow(TitleTextBox.Text.Length > 50);
+        
         /// <summary>
         /// Начинает отрисовку прямоугольника вокруг TitleTextBox
         /// </summary>
         private void Draw()
         {
-            Color drawColor = new Color();
+            Color Color = new Color();
 
             switch (_drawColor.CurrentColor)
             {
                 case MyColorClass.Colors.Red:
-                    drawColor = Color.Red;
+                    Color = Color.Red;
                     break;
 
                 case MyColorClass.Colors.Orange:
-                    drawColor = Color.Orange;
+                    Color = Color.Orange;
                     break;
 
                 case MyColorClass.Colors.Yellow:
-                    drawColor = Color.Yellow;
+                    Color = Color.Yellow;
                     break;
 
                 case MyColorClass.Colors.Green:
-                    drawColor = Color.Green;
+                    Color = Color.Green;
                     break;
 
                 case MyColorClass.Colors.LightBlue:
-                    drawColor = Color.LightBlue;
+                    Color = Color.LightBlue;
                     break;
 
                 case MyColorClass.Colors.Blue:
-                    drawColor = Color.Blue;
+                    Color = Color.Blue;
                     break;
 
                 case MyColorClass.Colors.Violet:
-                    drawColor = Color.Violet;
+                    Color = Color.Violet;
                     break;
             }
 
             using (Graphics g = Graphics.FromHwnd(Handle))
             {
-                g.DrawRectangle(new Pen(drawColor, 3), TitleTextBox.Location.X, TitleTextBox.Location.Y,
+                g.DrawRectangle(new Pen(Color, 3), TitleTextBox.Location.X, TitleTextBox.Location.Y,
                     TitleTextBox.Width, TitleTextBox.Height);
             }
 
@@ -325,23 +321,24 @@ namespace NoteAppUI
         private void ChangeColorTimer_Tick(object sender, EventArgs e) => Draw();
 
         /// <summary>
-        /// Обёртка для метода OnDraw()
+        /// Обертка для методов <see cref="Draw()"/> и <see cref="Clear()"/> 
         /// </summary>
-        private void StartRainbow()
+        /// <param name="state">Если true, вызывает метод <see cref="Draw()"/>.
+        /// Иначе - метод <see cref="Clear()"/></param>
+        private void DoRainbow(bool state)
         {
-            ChangeColorTimer.Enabled = true;
-            Draw();
-            TitleTextBox.ForeColor = Color.Red;
-        }
-
-        /// <summary>
-        /// Обёртка для метода OnClear()
-        /// </summary>
-        private void StopRainbow()
-        {
-            ChangeColorTimer.Enabled = false;
-            Clear();
-            TitleTextBox.ForeColor = Color.Black;
+            if (state)
+            {
+                ChangeColorTimer.Enabled = true;
+                Draw();
+                TitleTextBox.ForeColor = Color.Red;
+            }
+            else
+            {
+                ChangeColorTimer.Enabled = false;
+                Clear();
+                TitleTextBox.ForeColor = Color.Black;
+            }
         }
     }
 }

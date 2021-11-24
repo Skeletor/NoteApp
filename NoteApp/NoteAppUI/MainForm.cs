@@ -14,7 +14,7 @@ namespace NoteAppUI
         /// <summary>
         /// Переменная для хранения всех заметок
         /// </summary>
-        private Project Proj { get; set; }
+        private Project Project { get; set; }
 
         /// <summary>
         /// Происходит при создании формы
@@ -74,10 +74,9 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void EditButton_Click(object sender, EventArgs e)
         {
-            int noteIndex = 0;
             Note noteFromList = NoteList.SelectedItem as Note;
 
-            noteIndex = noteFromList is null ? 0 : NoteList.Items.IndexOf(noteFromList);
+            int noteIndex = noteFromList is null ? 0 : NoteList.Items.IndexOf(noteFromList);
 
             using (EditNoteForm editForm = new EditNoteForm(noteFromList))
             {
@@ -112,7 +111,7 @@ namespace NoteAppUI
                     DialogResult.OK)
                 {
                     NoteList.Items.RemoveAt(index);
-                    Proj.Notes.RemoveAt(index);
+                    Project.Notes.RemoveAt(index);
                 }
 
                 SaveData();
@@ -162,7 +161,7 @@ namespace NoteAppUI
             LoadData();
             NoteList.Items.Clear();
 
-            foreach (var item in Proj.Notes)
+            foreach (var item in Project.Notes)
             {
                 NoteList.Items.Add(item);
             }
@@ -184,12 +183,12 @@ namespace NoteAppUI
         /// <summary>
         /// Загрузить данные с файла
         /// </summary>
-        private void LoadData() => Proj = ProjectManager.LoadFrom();
+        private void LoadData() => Project = ProjectManager.LoadFrom();
 
         /// <summary>
         /// Сохранить данные в файл
         /// </summary>
-        private void SaveData() => ProjectManager.SaveTo(Proj);
+        private void SaveData() => ProjectManager.SaveTo(Project);
 
         /// <summary>
         /// Происходит при закрытии формы
@@ -218,14 +217,14 @@ namespace NoteAppUI
 
             if (NoteCategorySelector.SelectedItem.ToString() == "All")
             {
-                foreach (var item in Proj.Notes)
+                foreach (var item in Project.Notes)
                 {
                     NoteList.Items.Add(item);
                 }
             }
             else
             {
-                foreach (var item in Proj.Notes.Where(item => item.NoteCategory ==
+                foreach (var item in Project.Notes.Where(item => item.NoteCategory ==
                     (NoteCategory)NoteCategorySelector.SelectedIndex))
                 {
                     NoteList.Items.Add(item);
@@ -260,7 +259,8 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void DescriptionTextBox_Enter(object sender, EventArgs e)
         {
-            toolTip.SetToolTip(DescriptionTextBox, "In order to redact the note press the \"Edit\" button in the lower left corner");
+            toolTip.SetToolTip(DescriptionTextBox, "In order to redact the note press the \"Edit\" button in the" +
+                " lower left corner");
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) => CreateButton_Click(sender, e);

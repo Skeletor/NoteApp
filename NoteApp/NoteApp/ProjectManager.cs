@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace NoteApp
@@ -68,10 +64,10 @@ namespace NoteApp
                 {
                     using (JsonReader jr = new JsonTextReader(sr))
                     {
-                        JsonSerializer jserializer = new JsonSerializer();
-                        Project proj = jserializer.Deserialize<Project>(jr);
+                        JsonSerializer serializer = new JsonSerializer();
+                        Project project = serializer.Deserialize<Project>(jr);
 
-                        return proj ?? new Project();
+                        return project ?? new Project();
                     }
                 }
             }
