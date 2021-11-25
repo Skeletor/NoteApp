@@ -10,14 +10,25 @@ namespace NoteApp
     public static class ProjectManager
     {
         /// <summary>
-        /// Путь к папке с файлом
+        /// Стандартный путь к папке с файлом
         /// </summary>
-        private static string FolderPath { get; } = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\NoteApp\";
+        private static string DefaultFolderPath { get; } = 
+            $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\NoteApp\";
 
         /// <summary>
-        /// Название файла
+        /// Стандартное название файла
         /// </summary>
-        private static string FileName { get; } = "NoteList.json";
+        private static string DefaultFileName { get; } = "NoteList.json";
+
+        /// <summary>
+        /// Изменяемый путь к папке
+        /// </summary>
+        public static string FolderPath { get; set; } = DefaultFolderPath;
+
+        /// <summary>
+        /// Изменяемое имя файла
+        /// </summary>
+        public static string FileName { get; set; } = DefaultFileName;
 
         /// <summary>
         /// Сохранение проекта в файл
@@ -36,9 +47,11 @@ namespace NoteApp
             }
 
             using (StreamWriter sw = new StreamWriter(FolderPath + FileName))
-            using (JsonWriter jr = new JsonTextWriter(sw))
             {
-                new JsonSerializer().Serialize(jr, project);
+                using (JsonWriter jr = new JsonTextWriter(sw))
+                {
+                    new JsonSerializer().Serialize(jr, project);
+                }
             }
         }
 

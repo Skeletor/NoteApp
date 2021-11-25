@@ -26,7 +26,7 @@ namespace NoteAppUI
             UpdateNoteList();
             ActivateButtons(false);
 
-            NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
+            NoteList.SelectedItem = Project.CurrentNote;
         }
 
         /// <summary>
@@ -34,11 +34,17 @@ namespace NoteAppUI
         /// </summary>
         private void FillWithDefault()
         {
-            object[] noteCategory = { NoteCategory.Job, NoteCategory.Home, NoteCategory.HealthAndSport,
-                NoteCategory.People, NoteCategory.Documents, NoteCategory.Finance, NoteCategory.Other };
+            NoteCategorySelector.Items.AddRange(new object[] {
+                "All",
+                NoteCategory.Job,
+                NoteCategory.Home,
+                NoteCategory.HealthAndSport,
+                NoteCategory.People,
+                NoteCategory.Documents,
+                NoteCategory.Finance,
+                NoteCategory.Other 
+            });
 
-            NoteCategorySelector.Items.Add("All");
-            NoteCategorySelector.Items.AddRange(noteCategory);
             NoteCategorySelector.SelectedIndex = 0;
         }
 
@@ -59,7 +65,7 @@ namespace NoteAppUI
                     }
 
                     UpdateNoteList();
-                    SortByCategory();
+                    SortList();
                     NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
                 };
 
@@ -88,7 +94,7 @@ namespace NoteAppUI
                     }
 
                     UpdateNoteList();
-                    SortByCategory();
+                    SortList();
                     NoteList.SelectedIndex = NoteList.Items.Count > 0 ? noteIndex : -1;
                 };
 
@@ -138,6 +144,8 @@ namespace NoteAppUI
             {
                 ActivateButtons(false);
             }
+
+            Project.CurrentNote = NoteList.SelectedItem as Note;
         }
 
         /// <summary>
@@ -205,27 +213,30 @@ namespace NoteAppUI
         private void NoteCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadData();
-            SortByCategory();
+            SortList();
         }
 
         /// <summary>
         /// Отображает только те заметки, что совпадают с выбранной в списке категорией
         /// </summary>
-        private void SortByCategory()
+        private void SortList()
         {
             NoteList.Items.Clear();
 
             if (NoteCategorySelector.SelectedItem.ToString() == "All")
             {
-                foreach (var item in Project.Notes)
+                var sorted = Project.SortProject(Project);
+
+                foreach (var item in sorted.Notes)
                 {
                     NoteList.Items.Add(item);
                 }
             }
             else
             {
-                foreach (var item in Project.Notes.Where(item => item.NoteCategory ==
-                    (NoteCategory)NoteCategorySelector.SelectedIndex))
+                var sorted = Project.SortProject(Project, (NoteCategory)NoteCategorySelector.SelectedIndex);
+
+                foreach (var item in sorted.Notes)
                 {
                     NoteList.Items.Add(item);
                 }
@@ -268,5 +279,10 @@ namespace NoteAppUI
         private void editToolStripMenuItem_Click(object sender, EventArgs e) => EditButton_Click(sender, e);
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => DeleteButton_Click(sender, e);
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            SortList();
+        }
     }
 }

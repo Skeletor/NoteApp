@@ -137,5 +137,8 @@
   <ItemGroup>
     <None Include="Resources\add_icon_big.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_icon_big.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

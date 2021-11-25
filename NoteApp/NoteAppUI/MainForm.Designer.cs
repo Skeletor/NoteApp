@@ -41,6 +41,10 @@ namespace NoteAppUI
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.RefreshButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.EditButton = new System.Windows.Forms.Button();
+            this.CreateButton = new System.Windows.Forms.Button();
             this.NoteList = new System.Windows.Forms.ListBox();
             this.NoteCategorySelector = new System.Windows.Forms.ComboBox();
             this.ShowCategoryLabel_ = new System.Windows.Forms.Label();
@@ -53,9 +57,6 @@ namespace NoteAppUI
             this.CategoryLabelStatic_ = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.EditButton = new System.Windows.Forms.Button();
-            this.CreateButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,7 +69,7 @@ namespace NoteAppUI
             this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExitMenu});
             this.FileMenu.Name = "FileMenu";
-            this.FileMenu.Size = new System.Drawing.Size(46, 24);
+            this.FileMenu.Size = new System.Drawing.Size(46, 26);
             this.FileMenu.Text = "File";
             // 
             // ExitMenu
@@ -87,7 +88,7 @@ namespace NoteAppUI
             this.AboutMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1062, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1062, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -98,34 +99,34 @@ namespace NoteAppUI
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.EditMenu.Name = "EditMenu";
-            this.EditMenu.Size = new System.Drawing.Size(49, 24);
+            this.EditMenu.Size = new System.Drawing.Size(49, 26);
             this.EditMenu.Text = "Edit";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
             this.newToolStripMenuItem.Text = "Add";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // AboutMenu
             // 
             this.AboutMenu.Name = "AboutMenu";
-            this.AboutMenu.Size = new System.Drawing.Size(64, 24);
+            this.AboutMenu.Size = new System.Drawing.Size(64, 26);
             this.AboutMenu.Text = "About";
             this.AboutMenu.Click += new System.EventHandler(this.AboutMenu_Click);
             // 
@@ -140,6 +141,7 @@ namespace NoteAppUI
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.RefreshButton);
             this.splitContainer1.Panel1.Controls.Add(this.DeleteButton);
             this.splitContainer1.Panel1.Controls.Add(this.EditButton);
             this.splitContainer1.Panel1.Controls.Add(this.CreateButton);
@@ -162,6 +164,68 @@ namespace NoteAppUI
             this.splitContainer1.SplitterDistance = 375;
             this.splitContainer1.TabIndex = 1;
             // 
+            // RefreshButton
+            // 
+            this.RefreshButton.BackgroundImage = global::NoteAppUI.Properties.Resources.refresh_icon_big;
+            this.RefreshButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.RefreshButton.Location = new System.Drawing.Point(313, 568);
+            this.RefreshButton.MaximumSize = new System.Drawing.Size(45, 45);
+            this.RefreshButton.MinimumSize = new System.Drawing.Size(45, 45);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(45, 45);
+            this.RefreshButton.TabIndex = 6;
+            this.toolTip.SetToolTip(this.RefreshButton, "Refresh");
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteButton.BackgroundImage = global::NoteAppUI.Properties.Resources.delete_icon_big;
+            this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DeleteButton.Location = new System.Drawing.Point(114, 568);
+            this.DeleteButton.MaximumSize = new System.Drawing.Size(45, 45);
+            this.DeleteButton.MinimumSize = new System.Drawing.Size(45, 45);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(45, 45);
+            this.DeleteButton.TabIndex = 5;
+            this.toolTip.SetToolTip(this.DeleteButton, "Delete");
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // EditButton
+            // 
+            this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditButton.BackgroundImage = global::NoteAppUI.Properties.Resources.test;
+            this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.EditButton.Location = new System.Drawing.Point(63, 568);
+            this.EditButton.MaximumSize = new System.Drawing.Size(45, 45);
+            this.EditButton.MinimumSize = new System.Drawing.Size(45, 45);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(45, 45);
+            this.EditButton.TabIndex = 4;
+            this.toolTip.SetToolTip(this.EditButton, "Edit");
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // CreateButton
+            // 
+            this.CreateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CreateButton.BackgroundImage = global::NoteAppUI.Properties.Resources.add_icon_big;
+            this.CreateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.CreateButton.Location = new System.Drawing.Point(12, 568);
+            this.CreateButton.MaximumSize = new System.Drawing.Size(45, 45);
+            this.CreateButton.MinimumSize = new System.Drawing.Size(45, 45);
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(45, 45);
+            this.CreateButton.TabIndex = 3;
+            this.toolTip.SetToolTip(this.CreateButton, "Add");
+            this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
+            // 
             // NoteList
             // 
             this.NoteList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -173,7 +237,7 @@ namespace NoteAppUI
             this.NoteList.ItemHeight = 20;
             this.NoteList.Location = new System.Drawing.Point(12, 53);
             this.NoteList.Name = "NoteList";
-            this.NoteList.Size = new System.Drawing.Size(346, 518);
+            this.NoteList.Size = new System.Drawing.Size(346, 509);
             this.NoteList.TabIndex = 2;
             this.NoteList.SelectedIndexChanged += new System.EventHandler(this.NoteList_SelectedIndexChanged);
             // 
@@ -284,54 +348,6 @@ namespace NoteAppUI
             this.toolTip.InitialDelay = 100;
             this.toolTip.ReshowDelay = 100;
             // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteButton.BackgroundImage = global::NoteAppUI.Properties.Resources.delete_icon_big;
-            this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.DeleteButton.Location = new System.Drawing.Point(114, 577);
-            this.DeleteButton.MaximumSize = new System.Drawing.Size(45, 45);
-            this.DeleteButton.MinimumSize = new System.Drawing.Size(45, 45);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(45, 45);
-            this.DeleteButton.TabIndex = 5;
-            this.toolTip.SetToolTip(this.DeleteButton, "Delete");
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // EditButton
-            // 
-            this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.EditButton.BackgroundImage = global::NoteAppUI.Properties.Resources.test;
-            this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.EditButton.Location = new System.Drawing.Point(63, 577);
-            this.EditButton.MaximumSize = new System.Drawing.Size(45, 45);
-            this.EditButton.MinimumSize = new System.Drawing.Size(45, 45);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(45, 45);
-            this.EditButton.TabIndex = 4;
-            this.toolTip.SetToolTip(this.EditButton, "Edit");
-            this.EditButton.UseVisualStyleBackColor = true;
-            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
-            // 
-            // CreateButton
-            // 
-            this.CreateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreateButton.BackgroundImage = global::NoteAppUI.Properties.Resources.add_icon_big;
-            this.CreateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.CreateButton.Location = new System.Drawing.Point(12, 577);
-            this.CreateButton.MaximumSize = new System.Drawing.Size(45, 45);
-            this.CreateButton.MinimumSize = new System.Drawing.Size(45, 45);
-            this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(45, 45);
-            this.CreateButton.TabIndex = 3;
-            this.toolTip.SetToolTip(this.CreateButton, "Add");
-            this.CreateButton.UseVisualStyleBackColor = true;
-            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -385,6 +401,7 @@ namespace NoteAppUI
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Button RefreshButton;
     }
 }
 
