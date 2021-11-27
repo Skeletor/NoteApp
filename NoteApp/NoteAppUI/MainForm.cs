@@ -12,9 +12,14 @@ namespace NoteAppUI
     public partial class MainForm : Form
     {
         /// <summary>
+        /// Константа для отображения всех категорий
+        /// </summary>
+        private const string AllCategories = "All";
+
+        /// <summary>
         /// Переменная для хранения всех заметок
         /// </summary>
-        private Project Project { get; set; }
+        private Project Project { get; set; } = ProjectManager.LoadFrom();
 
         /// <summary>
         /// Происходит при создании формы
@@ -22,8 +27,7 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
-            FillWithDefault();
-            UpdateNoteList();
+            FillComboBox();
             ActivateButtons(false);
 
             NoteList.SelectedItem = Project.CurrentNote;
@@ -32,30 +36,31 @@ namespace NoteAppUI
         /// <summary>
         /// Заполнение некоторых элементов стандартными значениями
         /// </summary>
-        private void FillWithDefault()
+        private void FillComboBox()
         {
-            NoteCategorySelector.Items.AddRange(new object[] {
-                "All",
-                NoteCategory.Job,
-                NoteCategory.Home,
-                NoteCategory.HealthAndSport,
-                NoteCategory.People,
-                NoteCategory.Documents,
-                NoteCategory.Finance,
-                NoteCategory.Other 
-            });
+            var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
 
-            NoteCategorySelector.SelectedIndex = 0;
+            NoteCategoryComboBox.Items.Add(AllCategories);
+            NoteCategoryComboBox.Items.AddRange(categories);
+            NoteCategoryComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
-        /// Происходит при нажатии на кнопку "Add"
+        /// Заполняет панель справа данными о заметке
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreateButton_Click(object sender, EventArgs e)
+        /// <param name="note">Заметка, данные о которой нужно передать</param>
+        private void FillNotePanel(Note note)
         {
-            using (EditNoteForm editForm = new EditNoteForm())
+            TitleLabel.Text = note?.Name;
+            NoteTextTextBox.Text = note?.NoteText;
+            CreationTimeDisplayer.Text = note?.CreationTime.ToString("g");
+            ModifyTimeDisplayer.Text = note?.LastModifyTime.ToString("g");
+            CategoryLabel.Text = note?.NoteCategory.ToString();
+        }
+
+        private void CreateNote()
+        {
+            using (NoteForm editForm = new NoteForm())
             {
                 editForm.FormClosing += (s, e1) =>
                 {
@@ -64,8 +69,7 @@ namespace NoteAppUI
                         NoteList.Items.Insert(0, editForm.NewNote.Name);
                     }
 
-                    UpdateNoteList();
-                    SortList();
+                    SortNoteList();
                     NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
                 };
 
@@ -73,18 +77,13 @@ namespace NoteAppUI
             }
         }
 
-        /// <summary>
-        /// Происходит при нажатии на кнопку "Edit"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditButton_Click(object sender, EventArgs e)
+        private void EditNote()
         {
             Note noteFromList = NoteList.SelectedItem as Note;
 
             int noteIndex = noteFromList is null ? 0 : NoteList.Items.IndexOf(noteFromList);
 
-            using (EditNoteForm editForm = new EditNoteForm(noteFromList))
+            using (NoteForm editForm = new NoteForm(noteFromList))
             {
                 editForm.FormClosing += (s, e1) =>
                 {
@@ -93,8 +92,7 @@ namespace NoteAppUI
                         NoteList.Items.Insert(noteIndex, editForm.NewNote);
                     }
 
-                    UpdateNoteList();
-                    SortList();
+                    SortNoteList();
                     NoteList.SelectedIndex = NoteList.Items.Count > 0 ? noteIndex : -1;
                 };
 
@@ -102,12 +100,7 @@ namespace NoteAppUI
             }
         }
 
-        /// <summary>
-        /// Происходит при нажатии на кнопку "Delete"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DeleteButton_Click(object sender, EventArgs e)
+        private void DeleteNote()
         {
             int index = NoteList.SelectedIndex;
 
@@ -118,9 +111,11 @@ namespace NoteAppUI
                 {
                     NoteList.Items.RemoveAt(index);
                     Project.Notes.RemoveAt(index);
-                }
 
-                SaveData();
+                    NoteList.SelectedIndex = index == 0 
+                        ? 0 
+                        : index - 1;
+                }
             }
             else
             {
@@ -129,69 +124,14 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Происходит при изменении выбора элемента в списке
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NoteList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (NoteList.SelectedItem is Note noteFromList)
-            {
-                ActivateButtons(true);
-                FillPanel2(noteFromList);
-            }
-            else
-            {
-                ActivateButtons(false);
-            }
-
-            Project.CurrentNote = NoteList.SelectedItem as Note;
-        }
-
-        /// <summary>
-        /// Заполняет панель справа данными о заметке
-        /// </summary>
-        /// <param name="note">Заметка, данные о которой нужно передать</param>
-        private void FillPanel2(Note note)
-        {
-            TitleLabel.Text = note.Name;
-            DescriptionTextBox.Text = note.NoteText;
-            CreationTimeDisplayer.Text = note.CreationTime.ToString("g");
-            ModifyTimeDisplayer.Text = note.LastModifyTime.ToString("g");
-            CategoryLabel.Text = note.NoteCategory.ToString();
-        }
-
-        /// <summary>
-        /// Обновляет показ списка заметок
-        /// </summary>
-        private void UpdateNoteList()
-        {
-            LoadData();
-            NoteList.Items.Clear();
-
-            foreach (var item in Project.Notes)
-            {
-                NoteList.Items.Add(item);
-            }
-        }
-        
-        /// <summary>
         /// Задает видимость кнопок "Edit" и "Delete"
         /// </summary>
         /// <param name="state">Если true, делает видимыми кнопки, иначе - скрывает</param>
         private void ActivateButtons(bool state)
         {
-            if (EditButton.Enabled != state && DeleteButton.Enabled != state)
-            {
-                EditButton.Enabled = state;
-                DeleteButton.Enabled = state;
-            }
+            EditButton.Enabled = state;
+            DeleteButton.Enabled = state;
         }
-
-        /// <summary>
-        /// Загрузить данные с файла
-        /// </summary>
-        private void LoadData() => Project = ProjectManager.LoadFrom();
 
         /// <summary>
         /// Сохранить данные в файл
@@ -199,62 +139,43 @@ namespace NoteAppUI
         private void SaveData() => ProjectManager.SaveTo(Project);
 
         /// <summary>
-        /// Происходит при закрытии формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => SaveData();
-
-        /// <summary>
-        /// Происходит при изменении выбора элемента категории заметок
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NoteCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadData();
-            SortList();
-        }
-
-        /// <summary>
         /// Отображает только те заметки, что совпадают с выбранной в списке категорией
         /// </summary>
-        private void SortList()
+        private void SortNoteList()
         {
             NoteList.Items.Clear();
 
-            if (NoteCategorySelector.SelectedItem.ToString() == "All")
-            {
-                var sorted = Project.SortProject(Project);
+            var sortedProject = NoteCategoryComboBox.SelectedItem.ToString() == AllCategories
+                ? Project.SortProject(Project) ?? new Project()
+                : Project.SortProject(Project, (NoteCategory)NoteCategoryComboBox.SelectedIndex) ?? new Project();
 
-                foreach (var item in sorted.Notes)
-                {
-                    NoteList.Items.Add(item);
-                }
-            }
-            else
-            {
-                var sorted = Project.SortProject(Project, (NoteCategory)NoteCategorySelector.SelectedIndex);
+            AddNotesToList(sortedProject);
+        }
 
-                foreach (var item in sorted.Notes)
-                {
-                    NoteList.Items.Add(item);
-                }
+        private void AddNotesToList(Project project)
+        {
+            foreach (var item in project.Notes)
+            {
+                NoteList.Items.Add(item);
             }
         }
         
-        /// <summary>
-        /// Происходит при нажатии на кнопку "Exit"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ExitMenu_Click(object sender, EventArgs e) => Close();
+        private void DescriptionTextBox_Enter(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip(NoteTextTextBox, "In order to redact the note press the \"Edit\" button in the" +
+                " lower left corner");
+        }
 
-        /// <summary>
-        /// Происходит при нажатии на кнопку "About"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) => CreateNote();
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e) => EditNote();
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => DeleteNote();
+
+        private void NoteCategoryCombobox_SelectedIndexChanged(object sender, EventArgs e) => SortNoteList();
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => SaveData();
+
         private void AboutMenu_Click(object sender, EventArgs e)
         {
             if (!AboutForm.IsShown)
@@ -263,26 +184,20 @@ namespace NoteAppUI
             }
         }
 
-        /// <summary>
-        /// Происходит, когда пользователь пытается нажать на окно описания заметки для ее редактирования
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DescriptionTextBox_Enter(object sender, EventArgs e)
+        private void NoteList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            toolTip.SetToolTip(DescriptionTextBox, "In order to redact the note press the \"Edit\" button in the" +
-                " lower left corner");
+            Project.CurrentNote = NoteList.SelectedItem as Note;
+
+            ActivateButtons(!(Project.CurrentNote is null));
+            FillNotePanel(Project.CurrentNote);
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e) => CreateButton_Click(sender, e);
+        private void CreateButton_Click(object sender, EventArgs e) => CreateNote();
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e) => EditButton_Click(sender, e);
+        private void EditButton_Click(object sender, EventArgs e) => EditNote();
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => DeleteButton_Click(sender, e);
+        private void DeleteButton_Click(object sender, EventArgs e) => DeleteNote();
 
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            SortList();
-        }
+        private void ExitMenu_Click(object sender, EventArgs e) => Close();
     }
 }

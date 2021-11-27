@@ -8,7 +8,7 @@ namespace NoteAppUI
     /// <summary>
     /// Окно создания/редактирования выбранных заметок
     /// </summary>
-    public partial class EditNoteForm : Form
+    public partial class NoteForm : Form
     {
         /// <summary>
         /// Стандартное название заголовка
@@ -38,7 +38,7 @@ namespace NoteAppUI
         /// <summary>
         /// Происходит при создании формы
         /// </summary>
-        public EditNoteForm()
+        public NoteForm()
         {
             InitializeComponent();
             FillEditForm(null);
@@ -48,7 +48,7 @@ namespace NoteAppUI
         /// Происходит при создании формы
         /// </summary>
         /// <param name="note">Заметка, данные которой нужно отобразить на форме</param>
-        public EditNoteForm(Note note)
+        public NoteForm(Note note)
         {
             InitializeComponent();
             FillEditForm(note);
