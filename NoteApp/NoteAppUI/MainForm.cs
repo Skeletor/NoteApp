@@ -30,7 +30,7 @@ namespace NoteAppUI
             FillComboBox();
             ActivateButtons(false);
 
-            NoteList.SelectedItem = Project.CurrentNote;
+            NoteListBox.SelectedItem = Project.CurrentNote;
         }
 
         /// <summary>
@@ -60,67 +60,91 @@ namespace NoteAppUI
 
         private void CreateNote()
         {
-            using (NoteForm editForm = new NoteForm())
+            var noteForm = new NoteForm();
+
+            if (noteForm.ShowDialog() != DialogResult.OK)
             {
-                editForm.FormClosing += (s, e1) =>
-                {
-                    if (editForm.NewNote != null)
-                    {
-                        NoteList.Items.Insert(0, editForm.NewNote.Name);
-                    }
-
-                    SortNoteList();
-                    NoteList.SelectedIndex = NoteList.Items.Count > 0 ? 0 : -1;
-                };
-
-                editForm.ShowDialog();
+                return;
             }
+
+            Project.Notes.Add(noteForm.NewNote);
+            NoteListBox.Items.Insert(0, noteForm.NewNote);
+
+            SortNoteList();
+            NoteListBox.SelectedIndex = 0;
+        }
+
+        private void TimeDisplayerGotFocus()
+        {
+            CreationTimeDisplayer.GotFocus += CreationTimeDisplayer_GotFocus;
+        }
+
+        private void CreationTimeDisplayer_GotFocus(object sender, EventArgs e)
+        {
+            this.ActiveControl = NoteListBox;
         }
 
         private void EditNote()
         {
-            Note noteFromList = NoteList.SelectedItem as Note;
+            var currentNote = Project.CurrentNote;
+            var noteBeforeEdit = currentNote.Clone() as Note;
 
-            int noteIndex = noteFromList is null ? 0 : NoteList.Items.IndexOf(noteFromList);
-
-            using (NoteForm editForm = new NoteForm(noteFromList))
+            var noteForm = new NoteForm()
             {
-                editForm.FormClosing += (s, e1) =>
-                {
-                    if (editForm.NewNote != null)
-                    {
-                        NoteList.Items.Insert(noteIndex, editForm.NewNote);
-                    }
+                NewNote = currentNote
+            };
 
-                    SortNoteList();
-                    NoteList.SelectedIndex = NoteList.Items.Count > 0 ? noteIndex : -1;
-                };
-
-                editForm.ShowDialog();
+            if (noteForm.ShowDialog() != DialogResult.OK || !WasNoteEdited(noteBeforeEdit, currentNote))
+            {
+                return;
             }
+
+            int noteIndex = currentNote is null
+                ? 0
+                : NoteListBox.Items.IndexOf(currentNote);
+
+            Project.Notes.RemoveAt(noteIndex);
+            Project.Notes.Add(noteForm.NewNote);
+
+            NoteListBox.Items.RemoveAt(noteIndex);
+            NoteListBox.Items.Insert(0, noteForm.NewNote);
+
+            NoteListBox.SelectedIndex = 0;
         }
 
         private void DeleteNote()
         {
-            int index = NoteList.SelectedIndex;
+            int noteIndex = NoteListBox.SelectedIndex;
 
-            if (index != -1)
+            if (noteIndex != -1)
             {
                 if (MessageBox.Show("Delete the selected note?", "Removing", MessageBoxButtons.OKCancel) ==
                     DialogResult.OK)
                 {
-                    NoteList.Items.RemoveAt(index);
-                    Project.Notes.RemoveAt(index);
+                    NoteListBox.Items.RemoveAt(noteIndex);
+                    Project.Notes.RemoveAt(noteIndex);
 
-                    NoteList.SelectedIndex = index == 0 
+                    NoteListBox.SelectedIndex = noteIndex == 0 
                         ? 0 
-                        : index - 1;
+                        : noteIndex - 1;
                 }
             }
             else
             {
                 MessageBox.Show("No note is chosen to delete", "Removing");
             }
+        }
+
+        /// <summary>
+        /// Проверяет, была ли изменена заметка
+        /// </summary>
+        /// <param name="before">Заметка до изменения</param>
+        /// <param name="after">Заметка после изменения</param>
+        /// <returns></returns>
+        private bool WasNoteEdited(Note before, Note after)
+        {
+            return before.Name != after.Name || before.NoteText != after.NoteText ||
+                before.NoteCategory != after.NoteCategory;
         }
 
         /// <summary>
@@ -143,7 +167,7 @@ namespace NoteAppUI
         /// </summary>
         private void SortNoteList()
         {
-            NoteList.Items.Clear();
+            NoteListBox.Items.Clear();
 
             var sortedProject = NoteCategoryComboBox.SelectedItem.ToString() == AllCategories
                 ? Project.SortProject(Project) ?? new Project()
@@ -156,7 +180,7 @@ namespace NoteAppUI
         {
             foreach (var item in project.Notes)
             {
-                NoteList.Items.Add(item);
+                NoteListBox.Items.Add(item);
             }
         }
         
@@ -186,7 +210,7 @@ namespace NoteAppUI
 
         private void NoteList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Project.CurrentNote = NoteList.SelectedItem as Note;
+            Project.CurrentNote = NoteListBox.SelectedItem as Note;
 
             ActivateButtons(!(Project.CurrentNote is null));
             FillNotePanel(Project.CurrentNote);
@@ -199,5 +223,6 @@ namespace NoteAppUI
         private void DeleteButton_Click(object sender, EventArgs e) => DeleteNote();
 
         private void ExitMenu_Click(object sender, EventArgs e) => Close();
+
     }
 }

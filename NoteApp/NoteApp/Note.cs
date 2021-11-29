@@ -18,7 +18,7 @@ namespace NoteApp
         /// <param name="name">Входящий параметр, определяющий заголовок заметки (необяз.)</param>
         /// <param name="noteText">Входящий параметр, определяющий текст заметки (необяз.)</param>
         /// <param name="noteCategory">Входящий параметр, определяющий категорию заметки (необяз.)</param>
-        public Note(string name = "Без названия", string noteText = "", NoteCategory noteCategory = NoteCategory.Other)
+        public Note(string name = "No name", string noteText = "", NoteCategory noteCategory = NoteCategory.Other)
         {
             Name = name;
             NoteText = noteText;
@@ -41,7 +41,7 @@ namespace NoteApp
             {
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Введенное значение больше 50 символов!");
+                    throw new ArgumentException($"{nameof(Name)} must be less than 50 symbols!");
                 }
                 
                 _name = value;
