@@ -247,7 +247,7 @@ namespace NoteAppUI
             this.NoteCategoryComboBox.Name = "NoteCategoryComboBox";
             this.NoteCategoryComboBox.Size = new System.Drawing.Size(175, 21);
             this.NoteCategoryComboBox.TabIndex = 1;
-            this.NoteCategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.NoteCategoryCombobox_SelectedIndexChanged);
+            this.NoteCategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.NoteCategoryComboBox_SelectedIndexChanged);
             // 
             // ShowCategoryLabel_
             // 
@@ -308,6 +308,7 @@ namespace NoteAppUI
             this.ModifyTimeDisplayer.ReadOnly = true;
             this.ModifyTimeDisplayer.Size = new System.Drawing.Size(98, 22);
             this.ModifyTimeDisplayer.TabIndex = 4;
+            this.ModifyTimeDisplayer.GotFocus += new System.EventHandler(ModifyTimeDisplayer_GotFocus);
             // 
             // CreationTimeDisplayer
             // 
@@ -319,6 +320,7 @@ namespace NoteAppUI
             this.CreationTimeDisplayer.ReadOnly = true;
             this.CreationTimeDisplayer.Size = new System.Drawing.Size(98, 22);
             this.CreationTimeDisplayer.TabIndex = 3;
+            this.CreationTimeDisplayer.GotFocus += new System.EventHandler(this.CreationTimeDisplayer_GotFocus);
             // 
             // CreatedLabel_
             // 

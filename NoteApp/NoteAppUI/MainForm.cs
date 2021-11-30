@@ -28,7 +28,7 @@ namespace NoteAppUI
         {
             InitializeComponent();
             FillComboBox();
-            ActivateButtons(false);
+            ActivateButtons(!(Project.CurrentNote is null));
 
             NoteListBox.SelectedItem = Project.CurrentNote;
         }
@@ -60,7 +60,10 @@ namespace NoteAppUI
 
         private void CreateNote()
         {
-            var noteForm = new NoteForm();
+            var noteForm = new NoteForm()
+            {
+                NewNote = null
+            };
 
             if (noteForm.ShowDialog() != DialogResult.OK)
             {
@@ -74,18 +77,14 @@ namespace NoteAppUI
             NoteListBox.SelectedIndex = 0;
         }
 
-        private void TimeDisplayerGotFocus()
-        {
-            CreationTimeDisplayer.GotFocus += CreationTimeDisplayer_GotFocus;
-        }
-
-        private void CreationTimeDisplayer_GotFocus(object sender, EventArgs e)
-        {
-            this.ActiveControl = NoteListBox;
-        }
-
         private void EditNote()
         {
+            if (Project.CurrentNote == null)
+            {
+                CreateNote();
+                return;
+            }
+
             var currentNote = Project.CurrentNote;
             var noteBeforeEdit = currentNote.Clone() as Note;
 
@@ -109,6 +108,8 @@ namespace NoteAppUI
             NoteListBox.Items.RemoveAt(noteIndex);
             NoteListBox.Items.Insert(0, noteForm.NewNote);
 
+            SortNoteList();
+
             NoteListBox.SelectedIndex = 0;
         }
 
@@ -116,23 +117,24 @@ namespace NoteAppUI
         {
             int noteIndex = NoteListBox.SelectedIndex;
 
-            if (noteIndex != -1)
-            {
-                if (MessageBox.Show("Delete the selected note?", "Removing", MessageBoxButtons.OKCancel) ==
-                    DialogResult.OK)
-                {
-                    NoteListBox.Items.RemoveAt(noteIndex);
-                    Project.Notes.RemoveAt(noteIndex);
-
-                    NoteListBox.SelectedIndex = noteIndex == 0 
-                        ? 0 
-                        : noteIndex - 1;
-                }
-            }
-            else
+            if (noteIndex == -1)
             {
                 MessageBox.Show("No note is chosen to delete", "Removing");
+                return;
             }
+
+            if (MessageBox.Show("Delete the selected note?", "Removing", MessageBoxButtons.OKCancel) !=
+                DialogResult.OK)
+            {
+                return;
+            }
+
+            NoteListBox.Items.RemoveAt(noteIndex);
+            Project.Notes.RemoveAt(noteIndex);
+
+            NoteListBox.SelectedIndex = (noteIndex == 0 && !(NoteListBox.Items.Count == 0))
+                ? 0
+                : noteIndex - 1;
         }
 
         /// <summary>
@@ -183,7 +185,7 @@ namespace NoteAppUI
                 NoteListBox.Items.Add(item);
             }
         }
-        
+
         private void DescriptionTextBox_Enter(object sender, EventArgs e)
         {
             toolTip.SetToolTip(NoteTextTextBox, "In order to redact the note press the \"Edit\" button in the" +
@@ -196,7 +198,13 @@ namespace NoteAppUI
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => DeleteNote();
 
-        private void NoteCategoryCombobox_SelectedIndexChanged(object sender, EventArgs e) => SortNoteList();
+        private void NoteCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SortNoteList();
+            NoteListBox.SelectedIndex = NoteListBox.Items.Count == 0 
+                ? -1 
+                : 0;
+        }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => SaveData();
 
@@ -215,6 +223,12 @@ namespace NoteAppUI
             ActivateButtons(!(Project.CurrentNote is null));
             FillNotePanel(Project.CurrentNote);
         }
+
+        private void CreationTimeDisplayer_GotFocus(object sender, EventArgs e) =>
+            ActiveControl = NoteListBox;
+
+        private void ModifyTimeDisplayer_GotFocus(object sender, EventArgs e) =>
+            CreationTimeDisplayer_GotFocus(sender, e);
 
         private void CreateButton_Click(object sender, EventArgs e) => CreateNote();
 

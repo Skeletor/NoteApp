@@ -27,7 +27,7 @@ namespace NoteAppUI
         public Note NewNote
         {
             get => _newNote;
-            set => FillNoteForm(_newNote = value);
+            set => FillNoteForm(_newNote = value ?? new Note("", "", NoteCategory.Other));
         }
 
         /// <summary>
@@ -43,36 +43,65 @@ namespace NoteAppUI
         /// </summary>
         private void FillNoteForm(Note note)
         {
-            FillControlsWithDefault();
+            FillComboBox();
 
-            NoteNameTextBox.Text = note?.Name;
-            NoteTextTextBox.Text = note?.NoteText;
-            CreationTimeDisplayer.Text = note?.CreationTime.ToString("g");
-            ModifyTimeDisplayer.Text = note?.LastModifyTime.ToString("g");
-
-            NoteCategoryComboBox.SelectedIndex = note is null
-                ? NoteCategoryComboBox.Items.Count - 1
-                : (int)note.NoteCategory - 1;
+            NoteNameTextBox.Text = note.Name;
+            NoteTextTextBox.Text = note.NoteText;
+            NoteCategoryComboBox.SelectedIndex = (int)note.NoteCategory - 1;
+            CreationTimeDisplayer.Text = note.CreationTime.ToString("g");
+            ModifyTimeDisplayer.Text = note.LastModifyTime.ToString("g");
         }
 
         /// <summary>
-        /// Заполнение элементов стандартными значениями
+        /// Заполнение элемента выбора категорий
         /// </summary>
-        private void FillControlsWithDefault()
+        private void FillComboBox()
         {
             var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
             NoteCategoryComboBox.Items.AddRange(categories);
             NoteCategoryComboBox.SelectedIndex = 0;
-
-            CreationTimeDisplayer.Text = DateTime.Now.ToString("g");
-            ModifyTimeDisplayer.Text = DateTime.Now.ToString("g");
         }
 
         /// <summary>
-        /// Происходит при нажатии на кнопку "OK"
+        /// Присвоить временной заметке данные из формы
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="name">Заголовок</param>
+        /// <param name="text">Описание</param>
+        /// <param name="category">Категория</param>
+        /// <returns>Изменённая заметка</returns>
+        private Note ChangeNewNoteAttributes(string name, string text, NoteCategory category)
+        {
+            NewNote.Name = name;
+            NewNote.NoteText = text;
+            NewNote.NoteCategory = category;
+            NewNote.LastModifyTime = DateTime.Now;
+
+            return NewNote;
+        }
+
+        /// <summary>
+        /// Отрисовывает прямоугольник вокруг TitleTextBox
+        /// </summary>
+        private void Draw()
+        {
+            using (var graphics = Graphics.FromHwnd(Handle))
+            {
+                graphics.DrawRectangle(new Pen(Color.Red, 3), NoteNameTextBox.Location.X,
+                    NoteNameTextBox.Location.Y, NoteNameTextBox.Width, NoteNameTextBox.Height);
+            }
+        }
+
+        /// <summary>
+        /// Очищает нарисованную область
+        /// </summary>
+        private void Clear()
+        {
+            using (var graphics = Graphics.FromHwnd(Handle))
+            {
+                graphics.Clear(BackColor);
+            }
+        }
+
         private void OKButton_Click(object sender, EventArgs e)
         {
             try
@@ -80,7 +109,7 @@ namespace NoteAppUI
                 if (NoteNameTextBox.Text.Trim() == "")
                 {
                     if (MessageBox.Show("Trying to save the note with the blank title. Will be saved as " +
-                        $"{DefaultName}", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        $"\"{DefaultName}\"", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
                         NewNote = ChangeNewNoteAttributes(DefaultName, NoteTextTextBox.Text,
                               (NoteCategory)(NoteCategoryComboBox.SelectedIndex + 1));
@@ -102,76 +131,35 @@ namespace NoteAppUI
             Close();
         }
 
-        /// <summary>
-        /// Присвоить временной заметке данные из формы
-        /// </summary>
-        /// <param name="name">Заголовок</param>
-        /// <param name="text">Описание</param>
-        /// <param name="category">Категория</param>
-        /// <returns>Изменённая заметка</returns>
-        private Note ChangeNewNoteAttributes(string name, string text, NoteCategory category)
-        {
-            NewNote.Name = name;
-            NewNote.NoteText = text;
-            NewNote.NoteCategory = category;
-            NewNote.LastModifyTime = DateTime.Now;
-
-            return NewNote;
-        }
-
-        /// <summary>
-        /// Происходит при нажатии на кнопку "Cancel"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            NewNote = null;
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        /// <summary>
-        /// Происходит при изменении текста в заголовке
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (NoteNameTextBox.Text.Length > 50)
+            var name = NoteNameTextBox.Text;
+
+            try
+            {
+                var tempNote = new Note(name);
+            }
+            catch
             {
                 Draw();
                 NoteNameTextBox.ForeColor = Color.Red;
+                return;
             }
-            else
-            {
-                Clear();
-                NoteNameTextBox.ForeColor = Color.Black;
-            }
-        }
-        
-        /// <summary>
-        /// Отрисовывает прямоугольник вокруг TitleTextBox
-        /// </summary>
-        private void Draw()
-        {
-            using (var graphics = Graphics.FromHwnd(Handle))
-            {
-                graphics.DrawRectangle(new Pen(Color.Red, 3), NoteNameTextBox.Location.X, NoteNameTextBox.Location.Y,
-                    NoteNameTextBox.Width, NoteNameTextBox.Height);
-            }
+
+            Clear();
+            NoteNameTextBox.ForeColor = Color.Black;
         }
 
-        /// <summary>
-        /// Очищает нарисованную область
-        /// </summary>
-        private void Clear()
-        {
-            using (var graphics = Graphics.FromHwnd(Handle))
-            {
-                graphics.Clear(BackColor);
-            }
-        }
+        private void CreationTimeDisplayer_GotFocus(object sender, EventArgs e) => 
+            ActiveControl = SuperSecretHiddenLabel;
 
+        private void ModifyTimeDisplayer_GotFocus(object sender, EventArgs e) => 
+            CreationTimeDisplayer_GotFocus(sender, e);
     }
 }

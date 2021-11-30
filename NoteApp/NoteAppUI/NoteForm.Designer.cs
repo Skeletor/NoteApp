@@ -41,6 +41,7 @@ namespace NoteAppUI
             this.ModifyTimeDisplayer = new System.Windows.Forms.TextBox();
             this.OKButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.SuperSecretHiddenLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TitleLabel_
@@ -49,10 +50,9 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel_.AutoSize = true;
             this.TitleLabel_.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleLabel_.Location = new System.Drawing.Point(11, 14);
-            this.TitleLabel_.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TitleLabel_.Location = new System.Drawing.Point(15, 17);
             this.TitleLabel_.Name = "TitleLabel_";
-            this.TitleLabel_.Size = new System.Drawing.Size(33, 15);
+            this.TitleLabel_.Size = new System.Drawing.Size(41, 20);
             this.TitleLabel_.TabIndex = 0;
             this.TitleLabel_.Text = "Title:";
             // 
@@ -62,10 +62,9 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryLabel_.AutoSize = true;
             this.CategoryLabel_.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CategoryLabel_.Location = new System.Drawing.Point(11, 37);
-            this.CategoryLabel_.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CategoryLabel_.Location = new System.Drawing.Point(15, 46);
             this.CategoryLabel_.Name = "CategoryLabel_";
-            this.CategoryLabel_.Size = new System.Drawing.Size(58, 15);
+            this.CategoryLabel_.Size = new System.Drawing.Size(72, 20);
             this.CategoryLabel_.TabIndex = 1;
             this.CategoryLabel_.Text = "Category:";
             // 
@@ -75,10 +74,9 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CreatedLabel_.AutoSize = true;
             this.CreatedLabel_.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreatedLabel_.Location = new System.Drawing.Point(11, 62);
-            this.CreatedLabel_.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CreatedLabel_.Location = new System.Drawing.Point(15, 76);
             this.CreatedLabel_.Name = "CreatedLabel_";
-            this.CreatedLabel_.Size = new System.Drawing.Size(51, 15);
+            this.CreatedLabel_.Size = new System.Drawing.Size(64, 20);
             this.CreatedLabel_.TabIndex = 2;
             this.CreatedLabel_.Text = "Created:";
             // 
@@ -89,10 +87,9 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ModifyTimeLabel_.AutoSize = true;
             this.ModifyTimeLabel_.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ModifyTimeLabel_.Location = new System.Drawing.Point(204, 62);
-            this.ModifyTimeLabel_.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ModifyTimeLabel_.Location = new System.Drawing.Point(272, 76);
             this.ModifyTimeLabel_.Name = "ModifyTimeLabel_";
-            this.ModifyTimeLabel_.Size = new System.Drawing.Size(102, 15);
+            this.ModifyTimeLabel_.Size = new System.Drawing.Size(126, 20);
             this.ModifyTimeLabel_.TabIndex = 3;
             this.ModifyTimeLabel_.Text = "Last Modify Time:";
             // 
@@ -102,12 +99,12 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.NoteCategoryComboBox.FormattingEnabled = true;
-            this.NoteCategoryComboBox.Location = new System.Drawing.Point(73, 35);
-            this.NoteCategoryComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.NoteCategoryComboBox.MaximumSize = new System.Drawing.Size(98, 0);
-            this.NoteCategoryComboBox.MinimumSize = new System.Drawing.Size(98, 0);
+            this.NoteCategoryComboBox.Location = new System.Drawing.Point(97, 43);
+            this.NoteCategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.NoteCategoryComboBox.MaximumSize = new System.Drawing.Size(129, 0);
+            this.NoteCategoryComboBox.MinimumSize = new System.Drawing.Size(129, 0);
             this.NoteCategoryComboBox.Name = "NoteCategoryComboBox";
-            this.NoteCategoryComboBox.Size = new System.Drawing.Size(98, 21);
+            this.NoteCategoryComboBox.Size = new System.Drawing.Size(129, 24);
             this.NoteCategoryComboBox.TabIndex = 7;
             // 
             // NoteNameTextBox
@@ -116,10 +113,10 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteNameTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.NoteNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NoteNameTextBox.Location = new System.Drawing.Point(73, 10);
-            this.NoteNameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NoteNameTextBox.Location = new System.Drawing.Point(97, 12);
+            this.NoteNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NoteNameTextBox.Name = "NoteNameTextBox";
-            this.NoteNameTextBox.Size = new System.Drawing.Size(504, 21);
+            this.NoteNameTextBox.Size = new System.Drawing.Size(671, 24);
             this.NoteNameTextBox.TabIndex = 6;
             this.NoteNameTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
             // 
@@ -129,12 +126,12 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextTextBox.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NoteTextTextBox.Location = new System.Drawing.Point(10, 86);
-            this.NoteTextTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NoteTextTextBox.Location = new System.Drawing.Point(13, 106);
+            this.NoteTextTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NoteTextTextBox.Multiline = true;
             this.NoteTextTextBox.Name = "NoteTextTextBox";
             this.NoteTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.NoteTextTextBox.Size = new System.Drawing.Size(567, 242);
+            this.NoteTextTextBox.Size = new System.Drawing.Size(755, 297);
             this.NoteTextTextBox.TabIndex = 8;
             // 
             // CreationTimeDisplayer
@@ -143,14 +140,15 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CreationTimeDisplayer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreationTimeDisplayer.Location = new System.Drawing.Point(73, 60);
-            this.CreationTimeDisplayer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.CreationTimeDisplayer.MaximumSize = new System.Drawing.Size(98, 22);
-            this.CreationTimeDisplayer.MinimumSize = new System.Drawing.Size(98, 22);
+            this.CreationTimeDisplayer.Location = new System.Drawing.Point(97, 74);
+            this.CreationTimeDisplayer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CreationTimeDisplayer.MaximumSize = new System.Drawing.Size(129, 22);
+            this.CreationTimeDisplayer.MinimumSize = new System.Drawing.Size(129, 22);
             this.CreationTimeDisplayer.Name = "CreationTimeDisplayer";
             this.CreationTimeDisplayer.ReadOnly = true;
-            this.CreationTimeDisplayer.Size = new System.Drawing.Size(98, 22);
+            this.CreationTimeDisplayer.Size = new System.Drawing.Size(129, 26);
             this.CreationTimeDisplayer.TabIndex = 9;
+            this.CreationTimeDisplayer.GotFocus += new System.EventHandler(CreationTimeDisplayer_GotFocus);
             // 
             // ModifyTimeDisplayer
             // 
@@ -158,25 +156,26 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ModifyTimeDisplayer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ModifyTimeDisplayer.Location = new System.Drawing.Point(310, 60);
-            this.ModifyTimeDisplayer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ModifyTimeDisplayer.MaximumSize = new System.Drawing.Size(98, 22);
-            this.ModifyTimeDisplayer.MinimumSize = new System.Drawing.Size(98, 22);
+            this.ModifyTimeDisplayer.Location = new System.Drawing.Point(413, 74);
+            this.ModifyTimeDisplayer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ModifyTimeDisplayer.MaximumSize = new System.Drawing.Size(129, 22);
+            this.ModifyTimeDisplayer.MinimumSize = new System.Drawing.Size(129, 22);
             this.ModifyTimeDisplayer.Name = "ModifyTimeDisplayer";
             this.ModifyTimeDisplayer.ReadOnly = true;
-            this.ModifyTimeDisplayer.Size = new System.Drawing.Size(98, 22);
+            this.ModifyTimeDisplayer.Size = new System.Drawing.Size(129, 26);
             this.ModifyTimeDisplayer.TabIndex = 10;
+            this.ModifyTimeDisplayer.GotFocus += new System.EventHandler(ModifyTimeDisplayer_GotFocus);
             // 
             // OKButton
             // 
             this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OKButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OKButton.Location = new System.Drawing.Point(423, 332);
-            this.OKButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.OKButton.MaximumSize = new System.Drawing.Size(75, 25);
-            this.OKButton.MinimumSize = new System.Drawing.Size(75, 25);
+            this.OKButton.Location = new System.Drawing.Point(564, 409);
+            this.OKButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.OKButton.MaximumSize = new System.Drawing.Size(100, 31);
+            this.OKButton.MinimumSize = new System.Drawing.Size(100, 31);
             this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(75, 25);
+            this.OKButton.Size = new System.Drawing.Size(100, 31);
             this.OKButton.TabIndex = 11;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
@@ -186,22 +185,31 @@ namespace NoteAppUI
             // 
             this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CancelButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CancelButton.Location = new System.Drawing.Point(502, 332);
-            this.CancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.CancelButton.MaximumSize = new System.Drawing.Size(75, 25);
-            this.CancelButton.MinimumSize = new System.Drawing.Size(75, 25);
+            this.CancelButton.Location = new System.Drawing.Point(669, 409);
+            this.CancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CancelButton.MaximumSize = new System.Drawing.Size(100, 31);
+            this.CancelButton.MinimumSize = new System.Drawing.Size(100, 31);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 25);
+            this.CancelButton.Size = new System.Drawing.Size(100, 31);
             this.CancelButton.TabIndex = 12;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // SuperSecretHiddenLabel
+            // 
+            this.SuperSecretHiddenLabel.AutoSize = true;
+            this.SuperSecretHiddenLabel.Location = new System.Drawing.Point(712, 61);
+            this.SuperSecretHiddenLabel.Name = "SuperSecretHiddenLabel";
+            this.SuperSecretHiddenLabel.Size = new System.Drawing.Size(0, 17);
+            this.SuperSecretHiddenLabel.TabIndex = 13;
+            // 
             // NoteForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 368);
+            this.ClientSize = new System.Drawing.Size(784, 453);
+            this.Controls.Add(this.SuperSecretHiddenLabel);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.ModifyTimeDisplayer);
@@ -214,8 +222,8 @@ namespace NoteAppUI
             this.Controls.Add(this.CategoryLabel_);
             this.Controls.Add(this.TitleLabel_);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MinimumSize = new System.Drawing.Size(603, 229);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(798, 271);
             this.Name = "NoteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add/Edit Note";
@@ -237,5 +245,6 @@ namespace NoteAppUI
         private System.Windows.Forms.TextBox ModifyTimeDisplayer;
         private System.Windows.Forms.Button OKButton;
         private new System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Label SuperSecretHiddenLabel;
     }
 }
