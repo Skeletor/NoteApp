@@ -58,6 +58,9 @@ namespace NoteAppUI
             CategoryLabel.Text = note?.NoteCategory.ToString();
         }
 
+        /// <summary>
+        /// Создание заметки
+        /// </summary>
         private void CreateNote()
         {
             var noteForm = new NoteForm()
@@ -77,6 +80,9 @@ namespace NoteAppUI
             NoteListBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Изменение заметки
+        /// </summary>
         private void EditNote()
         {
             if (Project.CurrentNote == null)
@@ -109,10 +115,12 @@ namespace NoteAppUI
             NoteListBox.Items.Insert(0, noteForm.NewNote);
 
             SortNoteList();
-
             NoteListBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Удаление заметки
+        /// </summary>
         private void DeleteNote()
         {
             int noteIndex = NoteListBox.SelectedIndex;
@@ -142,7 +150,7 @@ namespace NoteAppUI
         /// </summary>
         /// <param name="before">Заметка до изменения</param>
         /// <param name="after">Заметка после изменения</param>
-        /// <returns></returns>
+        /// <returns>true, если была изменена, иначе - false</returns>
         private bool WasNoteEdited(Note before, Note after)
         {
             return before.Name != after.Name || before.NoteText != after.NoteText ||
@@ -178,6 +186,10 @@ namespace NoteAppUI
             AddNotesToList(sortedProject);
         }
 
+        /// <summary>
+        /// Метод добавления заметок в список
+        /// </summary>
+        /// <param name="project">Проект, заметки которого нужно добавить</param>
         private void AddNotesToList(Project project)
         {
             foreach (var item in project.Notes)
@@ -201,9 +213,28 @@ namespace NoteAppUI
         private void NoteCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             SortNoteList();
-            NoteListBox.SelectedIndex = NoteListBox.Items.Count == 0 
-                ? -1 
-                : 0;
+
+            if (NoteListBox.Items.Count == 0)
+            {
+                FillNotePanel(null);
+                Project.CurrentNote = null;
+            }
+            else
+            {
+                foreach (var item in NoteListBox.Items)
+                {
+                    if (Project.CurrentNote != null)
+                    {
+                        if (Project.CurrentNote.Equals(item))
+                        {
+                            NoteListBox.SelectedItem = item;
+                            return;
+                        }
+                    }
+                }
+
+                NoteListBox.SelectedItem = NoteListBox.Items[0];
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => SaveData();
@@ -237,6 +268,5 @@ namespace NoteAppUI
         private void DeleteButton_Click(object sender, EventArgs e) => DeleteNote();
 
         private void ExitMenu_Click(object sender, EventArgs e) => Close();
-
     }
 }

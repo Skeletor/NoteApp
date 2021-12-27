@@ -14,8 +14,8 @@ namespace NoteAppUnitTests
         [Test(Description = "Тест сеттера Notes")]
         public void Test_SetNotes()
         {
-            List<Note> expected = new List<Note>();
-            List<Note> actual = expected;
+            var expected = new List<Note>();
+            var actual = expected;
 
             Assert.AreEqual(expected, actual, "Неверное присвоение списка List<Note>");
         }
@@ -23,9 +23,9 @@ namespace NoteAppUnitTests
         [Test(Description = "Тест геттера Notes")]
         public void Test_GetNotes()
         {
-            List<Note> expected = new List<Note>();
-            List<Note> temp = expected;
-            List<Note> actual = temp;
+            var expected = new List<Note>();
+            var temp = expected;
+            var actual = temp;
 
             Assert.AreEqual(expected, actual, "Возврат неправильного списка List<Note>");
         }

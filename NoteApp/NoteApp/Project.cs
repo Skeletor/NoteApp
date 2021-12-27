@@ -14,7 +14,7 @@ namespace NoteApp
         public List<Note> Notes { get; set; } = new List<Note>();
 
         /// <summary>
-        /// Получает или задает последняю выделенную пользователем заметку
+        /// Получает или задает последнюю выделенную пользователем заметку
         /// </summary>
         public Note CurrentNote { get; set; } = null;
 

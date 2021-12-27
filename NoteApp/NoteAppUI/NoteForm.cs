@@ -80,7 +80,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Отрисовывает прямоугольник вокруг TitleTextBox
+        /// Отрисовывает прямоугольник вокруг <see cref="NoteNameTextBox"/>
         /// </summary>
         private void Draw()
         {

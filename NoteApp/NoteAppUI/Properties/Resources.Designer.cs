@@ -63,9 +63,9 @@ namespace NoteAppUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap add_file_icon_small {
+        internal static System.Drawing.Bitmap icons8_note_50 {
             get {
-                object obj = ResourceManager.GetObject("add_file_icon_small", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8-note-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,59 +73,9 @@ namespace NoteAppUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap add_icon_big {
+        internal static System.Drawing.Bitmap icons8_note_50_1 {
             get {
-                object obj = ResourceManager.GetObject("add_icon_big", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap delete_icon_big {
-            get {
-                object obj = ResourceManager.GetObject("delete_icon_big", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap delete_icon_small {
-            get {
-                object obj = ResourceManager.GetObject("delete_icon_small", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap edit_icon_medium {
-            get {
-                object obj = ResourceManager.GetObject("edit_icon_medium", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap refresh_icon_big {
-            get {
-                object obj = ResourceManager.GetObject("refresh_icon_big", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap test {
-            get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8-note-50_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
