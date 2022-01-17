@@ -148,7 +148,7 @@ namespace NoteAppUI
             this.CreationTimeDisplayer.ReadOnly = true;
             this.CreationTimeDisplayer.Size = new System.Drawing.Size(129, 26);
             this.CreationTimeDisplayer.TabIndex = 9;
-            this.CreationTimeDisplayer.GotFocus += new System.EventHandler(CreationTimeDisplayer_GotFocus);
+            this.CreationTimeDisplayer.GotFocus += new System.EventHandler(this.CreationTimeDisplayer_GotFocus);
             // 
             // ModifyTimeDisplayer
             // 
@@ -164,11 +164,11 @@ namespace NoteAppUI
             this.ModifyTimeDisplayer.ReadOnly = true;
             this.ModifyTimeDisplayer.Size = new System.Drawing.Size(129, 26);
             this.ModifyTimeDisplayer.TabIndex = 10;
-            this.ModifyTimeDisplayer.GotFocus += new System.EventHandler(ModifyTimeDisplayer_GotFocus);
+            this.ModifyTimeDisplayer.GotFocus += new System.EventHandler(this.ModifyTimeDisplayer_GotFocus);
             // 
             // OKButton
             // 
-            this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.OKButton.Location = new System.Drawing.Point(564, 409);
             this.OKButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -183,7 +183,7 @@ namespace NoteAppUI
             // 
             // CancelButton
             // 
-            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CancelButton.Location = new System.Drawing.Point(669, 409);
             this.CancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

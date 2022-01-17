@@ -200,7 +200,7 @@ namespace NoteAppUI
 
         private void DescriptionTextBox_Enter(object sender, EventArgs e)
         {
-            toolTip.SetToolTip(NoteTextTextBox, "In order to redact the note press the \"Edit\" button in the" +
+            toolTip.SetToolTip(NoteTextTextBox, "In order to edit the note press the \"Edit\" button in the" +
                 " lower left corner");
         }
 
