@@ -2,6 +2,7 @@
 using System.IO;
 using NoteApp;
 using System;
+using System.Reflection;
 
 namespace NoteAppUnitTests
 {
@@ -22,20 +23,22 @@ namespace NoteAppUnitTests
         }
 
         /// <summary>
-        /// Задание пути к папке с тестами и имя файла для <see cref="ProjectManager"/>
+        /// Задание пути к папке с тестами для <see cref="ProjectManager"/>
         /// </summary>
-        public void SetProjectManagerPathAndFileName()
-        {
-            ProjectManager.FileName = "testName.json";
-            ProjectManager.FolderPath = $@"{Environment.CurrentDirectory}\NoteAppTest\";
-        }
+        public string SetPath() => $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\NoteAppTest\";
+
+        /// <summary>
+        /// Задание имени файла
+        /// </summary>
+        /// <returns></returns>
+        public string SetFileName() => "testname.json";
 
         [Test(Description = "Тест сеттера FolderPath")]
         public void Set_FolderPath()
         {
             // Setup
             InitProject();
-            var actual = $@"{Environment.CurrentDirectory}\NoteAppTest\";
+            var actual = SetPath();
            
             // Act
             ProjectManager.FolderPath = actual;
@@ -50,7 +53,7 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            var actual = $@"{Environment.CurrentDirectory}\NoteAppTest\";
+            var actual = SetPath();
 
             // Act
             ProjectManager.FolderPath = actual;
@@ -66,7 +69,7 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            var actual = "testName";
+            var actual = SetFileName();
 
             // Act
             ProjectManager.FileName = actual;
@@ -81,7 +84,7 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            var actual = "testname";
+            var actual = SetFileName();
 
             // Act
             ProjectManager.FileName = actual;
@@ -97,7 +100,8 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            SetProjectManagerPathAndFileName();
+            ProjectManager.FolderPath = SetPath();
+            ProjectManager.FileName = SetFileName();
 
             // Act
             ProjectManager.SaveTo(_project);
@@ -115,7 +119,8 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            SetProjectManagerPathAndFileName();
+            ProjectManager.FolderPath = SetPath();
+            ProjectManager.FileName = SetFileName();
 
             // Act
             ProjectManager.SaveTo(_project);
@@ -128,12 +133,36 @@ namespace NoteAppUnitTests
             Directory.Delete(ProjectManager.FolderPath, true);
         }
 
-        [Test(Description = "Тест метода LoadFrom - проверка на создание каталога")]
-        public void LoadFrom_FolderPath()
+        [Test(Description = "Тест метода SaveTo - проверка на правильность сохранения")]
+        public void SaveTo_CorrectSave()
         {
             // Setup
             InitProject();
-            SetProjectManagerPathAndFileName();
+            ProjectManager.FolderPath = SetPath();
+            ProjectManager.FileName = SetFileName();
+
+            // Act
+            ProjectManager.SaveTo(_project);
+            ProjectManager.FileName = "testing-test.json";
+            var expected = new Project();
+            ProjectManager.SaveTo(expected);
+
+            // Assert
+            var expectedText = File.ReadAllText(ProjectManager.FolderPath + ProjectManager.FileName);
+            var actualText = File.ReadAllText(ProjectManager.FolderPath + SetFileName());
+            Assert.AreEqual(expectedText, actualText, "Неверное сохранение");
+
+            // Teardown
+            Directory.Delete(ProjectManager.FolderPath, true);
+        }
+
+        [Test(Description = "Тест метода LoadFrom - проверка на создание каталога")]
+        public void LoadFrom_FolderExists()
+        {
+            // Setup
+            InitProject();
+            ProjectManager.FolderPath = SetPath();
+            ProjectManager.FileName = SetFileName();
 
             // Act
             ProjectManager.LoadFrom();
@@ -151,7 +180,8 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            SetProjectManagerPathAndFileName();
+            ProjectManager.FolderPath = SetPath();
+            ProjectManager.FileName = SetFileName();
 
             // Act
             ProjectManager.SaveTo(_project);

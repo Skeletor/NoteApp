@@ -116,4 +116,11 @@
     <None Include="Resources\icons8-note-50_1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>md $(SolutionDir)InstallScripts\Release
+xcopy $(ProjectDir)$(OutDir)*.dll $(SolutionDir)InstallScripts\Release
+xcopy $(ProjectDir)$(OutDir)*.exe $(SolutionDir)InstallScripts\Release
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" $(SolutionDir)InstallScripts\Installers\NewSetupScript.iss
+rmdir $(SolutionDir)InstallScripts\Release</PostBuildEvent>
+  </PropertyGroup>
 </Project>

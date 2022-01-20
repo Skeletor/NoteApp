@@ -7,33 +7,45 @@ namespace NoteAppUnitTests
     [TestFixture]
     public class ProjectTests
     {
-        private List<Note> _notes;
+        /// <summary>
+        /// Временное поле <see cref="Project"/>
+        /// </summary>
+        private Project _project;
+
+        /// <summary>
+        /// Обновляет проект
+        /// </summary>
+        public void InitProject()
+        {
+            _project = new Project();
+        }
 
         [Test(Description = "Тест сеттера Notes")]
         public void SetNotes()
         {
             // Setup
-            var expected = new List<Note>(); 
+            InitProject();
+            var expected = new Project(); 
 
             // Act
-            _notes = expected;
+            _project.Notes = expected.Notes;
 
             // Assert
-            Assert.AreEqual(expected, _notes, "Неверное присвоение списка List<Note>");
+            Assert.AreEqual(expected.Notes, _project.Notes, "Неверное присвоение списка List<Note>");
         }
 
         [Test(Description = "Тест геттера Notes")]
         public void GetNotes()
         {
             // Setup
-            var expected = new List<Note>();
+            var expected = new Project();
 
             // Act
-            _notes = expected;
-            var actual = _notes;
+            _project.Notes = expected.Notes;
+            var actual = _project;
 
             // Assert
-            Assert.AreEqual(expected, actual, "Возврат неправильного списка List<Note>");
+            Assert.AreEqual(expected.Notes, actual.Notes, "Возврат неправильного списка List<Note>");
         }
     }
 }
