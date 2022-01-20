@@ -38,6 +38,7 @@ namespace NoteAppUnitTests
         public void GetNotes()
         {
             // Setup
+            InitProject();
             var expected = new Project();
 
             // Act
