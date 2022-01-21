@@ -1,6 +1,5 @@
 ﻿using NoteApp;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace NoteAppUnitTests
 {
@@ -25,7 +24,7 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            var expected = new Project(); 
+            var expected = new Project();
 
             // Act
             _project.Notes = expected.Notes;
@@ -50,3 +49,4 @@ namespace NoteAppUnitTests
         }
     }
 }
+

@@ -53,10 +53,10 @@ namespace NoteAppUnitTests
             var expected = "123456789 123456789 123456789 123456789 123456789 123456789";
 
             // Assert
-            Assert.Throws<ArgumentException>(() => 
+            Assert.Throws<ArgumentException>(() =>
             {
                 _note.Name = expected;
-            }, 
+            },
             "Должно возникнуть исключение (длина более 50 символов)");
         }
 
@@ -172,7 +172,7 @@ namespace NoteAppUnitTests
             // Act
             var expected = DateTime.Now;
             _note.LastModifyTime = expected;
-            
+
             // Assert
             Assert.AreEqual(expected, DateTime.Now, "Неправильное присвоение времени LastModifyTime");
         }

@@ -17,21 +17,19 @@ namespace NoteAppUnitTests
         /// <summary>
         /// "Конструктор" для поля _project
         /// </summary>
-        public void InitProject()
-        {
-            _project = new Project();
-        }
+        public void InitProject() => _project = new Project();
 
         /// <summary>
         /// Задание пути к папке с тестами для <see cref="ProjectManager"/>
         /// </summary>
-        public string SetPath() => $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\NoteAppTest\";
+        public string SetPath() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + 
+            @"\TestData\";
 
         /// <summary>
         /// Задание имени файла
         /// </summary>
         /// <returns></returns>
-        public string SetFileName() => "testname.json";
+        public string SetTestFileName() => "testname.json";
 
         [Test(Description = "Тест сеттера FolderPath")]
         public void Set_FolderPath()
@@ -39,15 +37,15 @@ namespace NoteAppUnitTests
             // Setup
             InitProject();
             var actual = SetPath();
-           
+
             // Act
             ProjectManager.FolderPath = actual;
-            
+
             // Assert
             Assert.AreEqual(actual, ProjectManager.FolderPath, "Неправильное присвоение пути в " +
                 nameof(ProjectManager.FolderPath));
         }
-        
+
         [Test(Description = "Тест геттера FolderPath")]
         public void Get_FolderPath()
         {
@@ -69,7 +67,7 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            var actual = SetFileName();
+            var actual = SetTestFileName();
 
             // Act
             ProjectManager.FileName = actual;
@@ -84,7 +82,7 @@ namespace NoteAppUnitTests
         {
             // Setup
             InitProject();
-            var actual = SetFileName();
+            var actual = SetTestFileName();
 
             // Act
             ProjectManager.FileName = actual;
@@ -96,41 +94,45 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест метода SaveTo - проверка на создание каталога")]
-        public void SaveTo_FolderExists()
+        public void SaveTo_FolderExists_ReturnsTrue()
         {
             // Setup
             InitProject();
             ProjectManager.FolderPath = SetPath();
-            ProjectManager.FileName = SetFileName();
+            ProjectManager.FileName = SetTestFileName();
 
             // Act
+            if (Directory.Exists(ProjectManager.FolderPath))
+            {
+                Directory.Delete(ProjectManager.FolderPath, true);
+            }
+
             ProjectManager.SaveTo(_project);
 
             // Assert
             var directoryExists = Directory.Exists(ProjectManager.FolderPath);
             Assert.IsTrue(directoryExists, "Каталог не был создан");
-
-            // Teardown
-            Directory.Delete(ProjectManager.FolderPath, true);
         }
 
         [Test(Description = "Тест метода SaveTo - проверка на создание файла")]
-        public void SaveTo_FileExists()
+        public void SaveTo_FileExists_ReturnsTrue()
         {
             // Setup
             InitProject();
             ProjectManager.FolderPath = SetPath();
-            ProjectManager.FileName = SetFileName();
+            ProjectManager.FileName = SetTestFileName();
 
             // Act
+            if (File.Exists(ProjectManager.FolderPath + ProjectManager.FileName))
+            {
+                File.Delete(ProjectManager.FolderPath + ProjectManager.FileName);
+            }
+
             ProjectManager.SaveTo(_project);
 
             // Assert
             var fileExists = File.Exists(ProjectManager.FolderPath + ProjectManager.FileName);
             Assert.IsTrue(fileExists, "Файл не был создан");
-
-            // Teardown
-            Directory.Delete(ProjectManager.FolderPath, true);
         }
 
         [Test(Description = "Тест метода SaveTo - проверка на правильность сохранения")]
@@ -139,40 +141,39 @@ namespace NoteAppUnitTests
             // Setup
             InitProject();
             ProjectManager.FolderPath = SetPath();
-            ProjectManager.FileName = SetFileName();
+            ProjectManager.FileName = SetTestFileName();
 
             // Act
             ProjectManager.SaveTo(_project);
-            ProjectManager.FileName = "testing-test.json";
+            ProjectManager.FileName = "anotherTestFile.json";
             var expected = new Project();
             ProjectManager.SaveTo(expected);
 
             // Assert
             var expectedText = File.ReadAllText(ProjectManager.FolderPath + ProjectManager.FileName);
-            var actualText = File.ReadAllText(ProjectManager.FolderPath + SetFileName());
+            var actualText = File.ReadAllText(ProjectManager.FolderPath + SetTestFileName());
             Assert.AreEqual(expectedText, actualText, "Неверное сохранение");
-
-            // Teardown
-            Directory.Delete(ProjectManager.FolderPath, true);
         }
 
         [Test(Description = "Тест метода LoadFrom - проверка на создание каталога")]
-        public void LoadFrom_FolderExists()
+        public void LoadFrom_FolderExists_ReturnsTrue()
         {
             // Setup
             InitProject();
             ProjectManager.FolderPath = SetPath();
-            ProjectManager.FileName = SetFileName();
+            ProjectManager.FileName = SetTestFileName();
 
             // Act
+            if (Directory.Exists(ProjectManager.FolderPath))
+            {
+                Directory.Delete(ProjectManager.FolderPath, true);
+            }
+
             ProjectManager.LoadFrom();
 
             // Assert
             var directoryExists = Directory.Exists(ProjectManager.FolderPath);
             Assert.IsTrue(directoryExists, "Каталог не был создан");
-
-            // Teardown
-            Directory.Delete(ProjectManager.FolderPath, true);
         }
 
         [Test(Description = "Тест метода LoadFrom - проверка на правильность загрузки")]
@@ -181,7 +182,7 @@ namespace NoteAppUnitTests
             // Setup
             InitProject();
             ProjectManager.FolderPath = SetPath();
-            ProjectManager.FileName = SetFileName();
+            ProjectManager.FileName = SetTestFileName();
 
             // Act
             ProjectManager.SaveTo(_project);
@@ -202,9 +203,6 @@ namespace NoteAppUnitTests
                 Assert.AreEqual(expected.CreationTime, actual.CreationTime, "Времена создания не совпадают");
                 Assert.AreEqual(expected.LastModifyTime, actual.LastModifyTime, "Времена последнего изменения не совпадают");
             }
-
-            // Teardown
-            Directory.Delete(ProjectManager.FolderPath, true);
         }
     }
 }
