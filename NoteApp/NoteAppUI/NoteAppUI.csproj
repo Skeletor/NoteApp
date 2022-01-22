@@ -122,7 +122,7 @@
 md $(SolutionDir)InstallScripts\Installers
 xcopy "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)InstallScripts\Release"
 xcopy "$(ProjectDir)$(OutDir)*.exe" "$(SolutionDir)InstallScripts\Release"
-xcopy "$(ProjectDir)$(OutDir)*.ico" "$(SolutionDir)InstallScripts\Release"
+xcopy "$(SolutionDir)*.ico" "$(SolutionDir)InstallScripts\Release"
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
