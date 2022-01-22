@@ -29,7 +29,7 @@ AllowNoIcons=yes
 ;PrivilegesRequired=lowest
 OutputDir=Installers
 OutputBaseFilename=NoteAppInstaller
-SetupIconFile=Release\appicon.ico
+SetupIconFile="..\appicon.ico"
 Compression=lzma
 SolidCompression=yes          
 WizardStyle=modern
@@ -42,7 +42,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Release\appicon.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\appicon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Release\NoteApp.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
