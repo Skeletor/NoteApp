@@ -41,9 +41,9 @@ namespace NoteApp
                 Directory.CreateDirectory(FolderPath);
             }
 
-            if (!File.Exists(FileName))
+            if (!File.Exists(FolderPath + FileName))
             {
-                File.Create(FileName);
+                File.Create(FolderPath + FileName);
             }
 
             using (StreamWriter sw = new StreamWriter(FolderPath + FileName))
@@ -66,7 +66,7 @@ namespace NoteApp
                 return new Project();
             }
 
-            if (!File.Exists(FileName))
+            if (!File.Exists(FolderPath + FileName))
             {
                 return new Project();
             }

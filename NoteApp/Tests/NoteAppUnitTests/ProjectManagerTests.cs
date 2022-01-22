@@ -22,8 +22,7 @@ namespace NoteAppUnitTests
         /// <summary>
         /// Задание пути к папке с тестами для <see cref="ProjectManager"/>
         /// </summary>
-        public string SetPath() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + 
-            @"\TestData\";
+        public string SetPath() => Environment.CurrentDirectory + @"\TestData\";
 
         /// <summary>
         /// Задание имени файла
@@ -107,12 +106,12 @@ namespace NoteAppUnitTests
             ProjectManager.FolderPath = SetPath();
             ProjectManager.FileName = SetTestFileName();
 
-            // Act
             if (Directory.Exists(ProjectManager.FolderPath))
             {
                 Directory.Delete(ProjectManager.FolderPath, true);
             }
 
+            // Act
             ProjectManager.SaveTo(_project);
 
             // Assert
@@ -128,12 +127,12 @@ namespace NoteAppUnitTests
             ProjectManager.FolderPath = SetPath();
             ProjectManager.FileName = SetTestFileName();
 
-            // Act
             if (File.Exists(ProjectManager.FolderPath + ProjectManager.FileName))
             {
                 File.Delete(ProjectManager.FolderPath + ProjectManager.FileName);
             }
 
+            // Act
             ProjectManager.SaveTo(_project);
 
             // Assert
@@ -165,9 +164,9 @@ namespace NoteAppUnitTests
             InitProject();
             ProjectManager.FolderPath = SetPath();
             ProjectManager.FileName = SetTestFileName();
+            ProjectManager.SaveTo(_project);
 
             // Act
-            ProjectManager.SaveTo(_project);
             var actualProject = ProjectManager.LoadFrom();
 
             // Assert
@@ -179,11 +178,7 @@ namespace NoteAppUnitTests
                 var expected = _project.Notes[i];
                 var actual = actualProject.Notes[i];
 
-                Assert.AreEqual(expected.Name, actual.Name, "Имена не совпадают");
-                Assert.AreEqual(expected.NoteText, actual.NoteText, "Тексты не совпадают");
-                Assert.AreEqual(expected.NoteCategory, actual.NoteCategory, "Категории не совпадают");
-                Assert.AreEqual(expected.CreationTime, actual.CreationTime, "Времена создания не совпадают");
-                Assert.AreEqual(expected.LastModifyTime, actual.LastModifyTime, "Времена последнего изменения не совпадают");
+                Assert.AreEqual(expected, actual, "Несовпадение заметок");
             }
         }
 
