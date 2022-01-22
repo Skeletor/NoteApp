@@ -79,6 +79,8 @@ namespace NoteAppUI
             SortNoteList();
             NoteCategoryComboBox.SelectedIndex = 0;
             NoteListBox.SelectedItem = noteForm.NewNote;
+
+            SaveData();
         }
 
         /// <summary>
@@ -117,6 +119,8 @@ namespace NoteAppUI
 
             SortNoteList();
             NoteListBox.SelectedIndex = 0;
+
+            SaveData();
         }
 
         /// <summary>
@@ -144,6 +148,8 @@ namespace NoteAppUI
             NoteListBox.SelectedIndex = (noteIndex == 0 && !(NoteListBox.Items.Count == 0))
                 ? 0
                 : noteIndex - 1;
+
+            SaveData();
         }
 
         /// <summary>
