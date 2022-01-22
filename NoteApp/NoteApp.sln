@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteAppUI", "NoteAppUI\NoteAppUI.csproj", "{504338D9-EC7C-4D2F-ADD0-88B6BA152041}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteApp", "NoteApp\NoteApp.csproj", "{59EC1B02-E6A8-4ED9-85BE-9E9A25B4A8A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2E476B7C-49BC-4EAC-9496-0065E2E0ECA5}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteAppUnitTests", "Tests\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{46931D1B-77AC-4C87-B923-6C5EB0373D04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteAppUI", "NoteAppUI\NoteAppUI.csproj", "{1C27D86E-DB99-4188-82ED-AC1E60006B20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{504338D9-EC7C-4D2F-ADD0-88B6BA152041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{504338D9-EC7C-4D2F-ADD0-88B6BA152041}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{504338D9-EC7C-4D2F-ADD0-88B6BA152041}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{504338D9-EC7C-4D2F-ADD0-88B6BA152041}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59EC1B02-E6A8-4ED9-85BE-9E9A25B4A8A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{59EC1B02-E6A8-4ED9-85BE-9E9A25B4A8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59EC1B02-E6A8-4ED9-85BE-9E9A25B4A8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +31,10 @@ Global
 		{46931D1B-77AC-4C87-B923-6C5EB0373D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46931D1B-77AC-4C87-B923-6C5EB0373D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46931D1B-77AC-4C87-B923-6C5EB0373D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C27D86E-DB99-4188-82ED-AC1E60006B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C27D86E-DB99-4188-82ED-AC1E60006B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C27D86E-DB99-4188-82ED-AC1E60006B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C27D86E-DB99-4188-82ED-AC1E60006B20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

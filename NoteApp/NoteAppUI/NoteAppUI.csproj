@@ -6,7 +6,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{504338D9-EC7C-4D2F-ADD0-88B6BA152041}</ProjectGuid>
+    <ProjectGuid>{1C27D86E-DB99-4188-82ED-AC1E60006B20}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>NoteAppUI</RootNamespace>
     <AssemblyName>NoteAppUI</AssemblyName>
