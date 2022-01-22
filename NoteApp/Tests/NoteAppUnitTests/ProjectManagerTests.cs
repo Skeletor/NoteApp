@@ -204,5 +204,21 @@ namespace NoteAppUnitTests
                 Assert.AreEqual(expected.LastModifyTime, actual.LastModifyTime, "Времена последнего изменения не совпадают");
             }
         }
+
+        [Test(Description = "Тест на загрузку несуществующего файла")]
+        public void LoadFrom_LoadFromFictionalFile_ReturnsEmptyProject()
+        {
+            // Setup
+            InitProject();
+            ProjectManager.FolderPath = SetPath();
+            ProjectManager.FileName = "fictionalfilename.json";
+
+            // Act
+            var actual = ProjectManager.LoadFrom();
+
+            // Assert
+            Assert.IsNotNull(actual, "Нулевой проект");
+            Assert.AreEqual(actual.Notes.Count, 0, "Количество заметок не 0");
+        }
     }
 }
