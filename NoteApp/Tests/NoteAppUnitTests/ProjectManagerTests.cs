@@ -31,8 +31,14 @@ namespace NoteAppUnitTests
         /// <returns></returns>
         public string SetTestFileName() => "testname.json";
 
-        [Test(Description = "Тест сеттера FolderPath")]
-        public void Test_Set_FolderPath()
+        /// <summary>
+        /// Тестовый файл с рабочими данными
+        /// </summary>
+        /// <returns></returns>
+        public string GoodFileName() => "GoodData.json";
+
+        [Test(Description = "Позитивный тест сеттера FolderPath")]
+        public void Test_Set_CorrectFolderPath()
         {
             // Setup
             InitProject();
@@ -47,7 +53,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест геттера FolderPath")]
-        public void Test_Get_FolderPath()
+        public void Test_Get_CorrectFolderPath()
         {
             // Setup
             InitProject();
@@ -62,8 +68,8 @@ namespace NoteAppUnitTests
                 nameof(ProjectManager.FolderPath));
         }
 
-        [Test(Description = "Тест сеттера FileName")]
-        public void Test_Set_FileName()
+        [Test(Description = "Позитивный тест сеттера FileName")]
+        public void Test_Set_CorrectFileName()
         {
             // Setup
             InitProject();
@@ -78,7 +84,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест геттера FileName")]
-        public void Test_Get_FileName()
+        public void Test_Get_CorrectFileName()
         {
             // Setup
             InitProject();
@@ -94,7 +100,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест метода SaveTo - проверка на создание каталога")]
-        public void Test_SaveTo_FolderExists_ReturnsTrue()
+        public void Test_SaveTo_IsFolderCreated()
         {
             // Setup
             InitProject();
@@ -115,7 +121,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест метода SaveTo - проверка на создание файла")]
-        public void Test_SaveTo_FileExists_ReturnsTrue()
+        public void Test_SaveTo_IsFileCreated()
         {
             // Setup
             InitProject();
@@ -136,7 +142,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест метода SaveTo - проверка на правильность сохранения")]
-        public void Test_SaveTo_CorrectSave()
+        public void Test_SaveTo_CorrectProject_SavedCorrectly()
         {
             // Setup
             InitProject();
@@ -145,39 +151,15 @@ namespace NoteAppUnitTests
 
             // Act
             ProjectManager.SaveTo(_project);
-            ProjectManager.FileName = "anotherTestFile.json";
-            var expected = new Project();
-            ProjectManager.SaveTo(expected);
 
             // Assert
             var expectedText = File.ReadAllText(ProjectManager.FolderPath + ProjectManager.FileName);
-            var actualText = File.ReadAllText(ProjectManager.FolderPath + SetTestFileName());
+            var actualText = File.ReadAllText(ProjectManager.FolderPath + GoodFileName());
             Assert.AreEqual(expectedText, actualText, "Неверное сохранение");
         }
 
-        [Test(Description = "Тест метода LoadFrom - проверка на создание каталога")]
-        public void Test_LoadFrom_FolderExists_ReturnsTrue()
-        {
-            // Setup
-            InitProject();
-            ProjectManager.FolderPath = SetPath();
-            ProjectManager.FileName = SetTestFileName();
-
-            // Act
-            if (Directory.Exists(ProjectManager.FolderPath))
-            {
-                Directory.Delete(ProjectManager.FolderPath, true);
-            }
-
-            ProjectManager.LoadFrom();
-
-            // Assert
-            var directoryExists = Directory.Exists(ProjectManager.FolderPath);
-            Assert.IsTrue(directoryExists, "Каталог не был создан");
-        }
-
         [Test(Description = "Тест метода LoadFrom - проверка на правильность загрузки")]
-        public void Test_LoadFrom_CorrectLoad()
+        public void Test_LoadFrom_CorrectProject_CorrectLoad()
         {
             // Setup
             InitProject();
@@ -205,7 +187,7 @@ namespace NoteAppUnitTests
             }
         }
 
-        [Test(Description = "Тест на загрузку несуществующего файла")]
+        [Test(Description = "Тест метода LoadFrom - проверка на загрузку несуществующего файла")]
         public void Test_LoadFrom_LoadFromFictionalFile_ReturnsEmptyProject()
         {
             // Setup

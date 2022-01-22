@@ -7,15 +7,21 @@ namespace NoteAppUnitTests
     [TestFixture]
     public class NoteTests
     {
+        /// <summary>
+        /// Переменная для тестов
+        /// </summary>
         private Note _note;
 
+        /// <summary>
+        /// Обновление заметки
+        /// </summary>
         public void InitNote()
         {
             _note = new Note();
         }
 
         [Test(Description = "Тест геттера Name")]
-        public void Name_GetCorrectValue()
+        public void Test_Name_GetCorrectValue()
         {
             // Setup
             InitNote();
@@ -77,7 +83,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест сеттера NoteCategory")]
-        public void Test_SetNoteCategory()
+        public void Test_NoteCategory_SetCorrectValue()
         {
             // Setup
             InitNote();
@@ -106,7 +112,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест сеттера NoteText")]
-        public void Test_SetNoteText()
+        public void Test_NoteText_SetCorrectValue()
         {
             // Setup
             InitNote();
@@ -120,7 +126,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест геттера NoteText")]
-        public void Test_GetNoteText()
+        public void Test_NoteText_GetValue()
         {
             // Setup
             InitNote();
@@ -135,7 +141,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест сеттера CreationTime")]
-        public void Test_SetCreationTime()
+        public void Test_CreationTime_SetCorrectValue()
         {
             // Setup
             InitNote();
@@ -149,7 +155,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест геттера CreationTime")]
-        public void Test_GetCreationTime()
+        public void Test_CreationTime_GetValue()
         {
             // Setup
             InitNote();
@@ -164,7 +170,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест сеттера LastModifyTime")]
-        public void Test_SetLastModifyTime()
+        public void Test_LastModifyTime_SetCorrectValue()
         {
             // Setup
             InitNote();
@@ -178,7 +184,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест геттера LastModifyTime")]
-        public void Test_GetLastModifyTime()
+        public void Test_LastModifyTime_GetValue()
         {
             // Setup
             InitNote();

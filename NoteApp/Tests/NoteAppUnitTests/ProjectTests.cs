@@ -19,8 +19,8 @@ namespace NoteAppUnitTests
             _project = new Project();
         }
 
-        [Test(Description = "Тест сеттера Notes")]
-        public void SetNotes()
+        [Test(Description = "Позитивный тест сеттера Notes")]
+        public void Test_Notes_SetCorrectValue()
         {
             // Setup
             InitProject();
@@ -34,7 +34,7 @@ namespace NoteAppUnitTests
         }
 
         [Test(Description = "Тест геттера Notes")]
-        public void GetNotes()
+        public void Test_Notes_GetValue()
         {
             // Setup
             InitProject();

@@ -77,7 +77,18 @@ namespace NoteAppUI
             NoteListBox.Items.Insert(0, noteForm.NewNote);
 
             SortNoteList();
-            NoteListBox.SelectedIndex = 0;
+            if (NoteCategoryComboBox.SelectedItem.ToString() == AllCategories)
+            {
+                NoteListBox.SelectedIndex = 0;
+            }
+            else if (noteForm.NewNote.NoteCategory == (NoteCategory)NoteCategoryComboBox.SelectedItem)
+            {
+                NoteListBox.SelectedIndex = 0;
+            }
+            else
+            {
+                NoteListBox.SelectedIndex = -1;
+            }
         }
 
         /// <summary>

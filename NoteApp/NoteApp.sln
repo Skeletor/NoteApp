@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteApp", "NoteApp\NoteApp.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2E476B7C-49BC-4EAC-9496-0065E2E0ECA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteAppUnitTests", "Tests\NoteAppUnitTests\NoteAppUnitTests.csproj", "{AD6D8E2D-5DD3-4752-97BC-F0832E0B42A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteApp.UnitTests", "Tests\NoteAppUnitTests\NoteApp.UnitTests.csproj", "{AD6D8E2D-5DD3-4752-97BC-F0832E0B42A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{46931D1B-77AC-4C87-B923-6C5EB0373D04}"
 EndProject

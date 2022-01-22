@@ -63,7 +63,7 @@ namespace NoteApp
         {
             if (!Directory.Exists(FolderPath))
             {
-                Directory.CreateDirectory(FolderPath);
+                return new Project();
             }
 
             if (!File.Exists(FileName))
