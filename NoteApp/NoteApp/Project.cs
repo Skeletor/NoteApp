@@ -16,7 +16,7 @@ namespace NoteApp
         /// <summary>
         /// Получает или задает последнюю выделенную пользователем заметку
         /// </summary>
-        public Note CurrentNote { get; set; } = null;
+        public int CurrentNote { get; set; } = -1;
 
         /// <summary>
         /// Сортирует список заметок по времени изменения (последняя изменённая заметка будет первой в списке)

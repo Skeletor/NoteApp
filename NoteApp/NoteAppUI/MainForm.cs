@@ -28,9 +28,9 @@ namespace NoteAppUI
         {
             InitializeComponent();
             FillComboBox();
-            ActivateButtons(!(Project.CurrentNote is null));
+            ActivateButtons(Project.CurrentNote != -1);
 
-            NoteListBox.SelectedItem = Project.CurrentNote;
+            NoteListBox.SelectedIndex = Project.CurrentNote;
         }
 
         /// <summary>
@@ -88,13 +88,14 @@ namespace NoteAppUI
         /// </summary>
         private void EditNote()
         {
-            if (Project.CurrentNote == null)
+            if (Project.CurrentNote == -1)
             {
                 CreateNote();
                 return;
             }
 
-            var currentNote = Project.CurrentNote;
+            var index = Project.CurrentNote;
+            var currentNote = NoteListBox.Items[index] as Note;
             var noteBeforeEdit = currentNote.Clone() as Note;
 
             var noteForm = new NoteForm()
@@ -224,15 +225,15 @@ namespace NoteAppUI
             if (NoteListBox.Items.Count == 0)
             {
                 FillNotePanel(null);
-                Project.CurrentNote = null;
+                Project.CurrentNote = -1;
             }
             else
             {
                 foreach (var item in NoteListBox.Items)
                 {
-                    if (Project.CurrentNote != null)
+                    if (Project.CurrentNote != -1)
                     {
-                        if (Project.CurrentNote.Equals(item))
+                        if (NoteListBox.Items[Project.CurrentNote].Equals(item))
                         {
                             NoteListBox.SelectedItem = item;
                             return;
@@ -256,10 +257,17 @@ namespace NoteAppUI
 
         private void NoteList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Project.CurrentNote = NoteListBox.SelectedItem as Note;
+            if (NoteListBox.SelectedIndex == -1)
+            {
+                FillNotePanel(null);
+                Project.CurrentNote = 0;
+                return;
+            }
 
-            ActivateButtons(!(Project.CurrentNote is null));
-            FillNotePanel(Project.CurrentNote);
+            Project.CurrentNote = NoteListBox.SelectedIndex;
+
+            ActivateButtons(Project.CurrentNote != -1);
+            FillNotePanel(NoteListBox.Items[Project.CurrentNote] as Note);
         }
 
         private void CreationTimeDisplayer_GotFocus(object sender, EventArgs e) =>
