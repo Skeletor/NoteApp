@@ -28,7 +28,7 @@ namespace NoteAppUI
         {
             InitializeComponent();
             FillComboBox();
-            ActivateButtons(Project.CurrentNote != -1);
+            ActivateButtons(Project.CurrentNote != -1 || NoteListBox.Items.Count != 0);
 
             NoteListBox.SelectedIndex = Project.CurrentNote;
         }
@@ -88,15 +88,14 @@ namespace NoteAppUI
         /// </summary>
         private void EditNote()
         {
-            if (Project.CurrentNote == -1)
+            if (Project.CurrentNote == -1 || NoteListBox.Items.Count == 0)
             {
                 CreateNote();
                 return;
             }
 
-            var index = Project.CurrentNote;
-            var currentNote = NoteListBox.Items[index] as Note;
-            var noteBeforeEdit = currentNote.Clone() as Note;
+            var currentNote = NoteListBox.SelectedItem as Note;
+            var noteBeforeEdit = currentNote?.Clone() as Note;
 
             var noteForm = new NoteForm()
             {
@@ -108,18 +107,12 @@ namespace NoteAppUI
                 return;
             }
 
-            int noteIndex = currentNote is null
-                ? 0
-                : NoteListBox.Items.IndexOf(currentNote);
-
-            Project.Notes.RemoveAt(noteIndex);
+            Project.Notes.RemoveAt(Project.CurrentNote);
             Project.Notes.Add(noteForm.NewNote);
 
-            NoteListBox.Items.RemoveAt(noteIndex);
-            NoteListBox.Items.Insert(0, noteForm.NewNote);
-
             SortNoteList();
-            NoteListBox.SelectedIndex = 0;
+            NoteCategoryComboBox.SelectedIndex = 0;
+            NoteListBox.SelectedItem = noteForm.NewNote;
 
             SaveData();
         }
@@ -222,30 +215,24 @@ namespace NoteAppUI
         {
             SortNoteList();
 
-            if (NoteListBox.Items.Count == 0)
+            if (Project.CurrentNote == -1 || NoteListBox.Items.Count == 0)
             {
                 FillNotePanel(null);
-                Project.CurrentNote = -1;
+                ActivateButtons(false);
+                return;
             }
-            else
+
+            foreach (var item in NoteListBox.Items)
             {
-                foreach (var item in NoteListBox.Items)
+                if (Project.Notes[Project.CurrentNote].Equals(item))
                 {
-                    if (Project.CurrentNote != -1)
-                    {
-                        if (NoteListBox.Items[Project.CurrentNote].Equals(item))
-                        {
-                            NoteListBox.SelectedItem = item;
-                            return;
-                        }
-                    }
+                    NoteListBox.SelectedItem = item;
+                    return;
                 }
-
-                NoteListBox.SelectedItem = NoteListBox.Items[0];
             }
-        }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => SaveData();
+            NoteListBox.SelectedItem = NoteListBox.Items[0];
+        }
 
         private void AboutMenu_Click(object sender, EventArgs e)
         {
@@ -260,14 +247,39 @@ namespace NoteAppUI
             if (NoteListBox.SelectedIndex == -1)
             {
                 FillNotePanel(null);
-                Project.CurrentNote = 0;
+                Project.CurrentNote = -1;
+                ActivateButtons(false);
                 return;
             }
 
-            Project.CurrentNote = NoteListBox.SelectedIndex;
+            Project.CurrentNote = Project.Notes.IndexOf(NoteListBox.SelectedItem as Note);
 
             ActivateButtons(Project.CurrentNote != -1);
-            FillNotePanel(NoteListBox.Items[Project.CurrentNote] as Note);
+            FillNotePanel(NoteListBox.SelectedItem as Note);
+        }
+
+        private void EditButton_EnabledChanged(object sender, EventArgs e)
+        {
+            if (EditButton.Enabled)
+            {
+                EditButton.BackgroundImage = Properties.Resources.icons8_edit_500;
+            }
+            else
+            {
+                EditButton.BackgroundImage = Properties.Resources.icons8_edit_gray;
+            }
+        }
+
+        private void DeleteButton_EnabledChanged(object sender, EventArgs e)
+        {
+            if (DeleteButton.Enabled)
+            {
+                DeleteButton.BackgroundImage = Properties.Resources.icons8_delete_480;
+            }
+            else
+            {
+                DeleteButton.BackgroundImage = Properties.Resources.icons8_delete_gray;
+            }
         }
 
         private void CreationTimeDisplayer_GotFocus(object sender, EventArgs e) =>
@@ -283,5 +295,7 @@ namespace NoteAppUI
         private void DeleteButton_Click(object sender, EventArgs e) => DeleteNote();
 
         private void ExitMenu_Click(object sender, EventArgs e) => Close();
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => SaveData();
     }
 }

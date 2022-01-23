@@ -320,6 +320,7 @@ namespace NoteAppUI
             this.DeleteButton.TabIndex = 5;
             this.toolTip.SetToolTip(this.DeleteButton, "Delete");
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.EnabledChanged += new System.EventHandler(this.DeleteButton_EnabledChanged);
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // EditButton
@@ -339,6 +340,7 @@ namespace NoteAppUI
             this.EditButton.TabIndex = 4;
             this.toolTip.SetToolTip(this.EditButton, "Edit");
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.EnabledChanged += new System.EventHandler(this.EditButton_EnabledChanged);
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // CreateButton

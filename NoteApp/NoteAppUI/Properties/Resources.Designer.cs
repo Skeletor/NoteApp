@@ -73,9 +73,29 @@ namespace NoteAppUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_delete_gray {
+            get {
+                object obj = ResourceManager.GetObject("icons8-delete-gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_edit_500 {
             get {
                 object obj = ResourceManager.GetObject("icons8-edit-500", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_edit_gray {
+            get {
+                object obj = ResourceManager.GetObject("icons8-edit-gray", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
