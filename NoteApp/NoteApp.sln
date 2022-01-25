@@ -13,6 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Inst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteAppUI", "NoteAppUI\NoteAppUI.csproj", "{7ABDFA5A-0B13-48B6-B970-AE03E3422E0B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{78B7B497-5EA4-46C3-A046-5E4024E8E407}"
+	ProjectSection(SolutionItems) = preProject
+		Documents\Calendar Plan.docx = Documents\Calendar Plan.docx
+		Documents\Explanation List.docx = Documents\Explanation List.docx
+		Documents\Retrospective.docx = Documents\Retrospective.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
